@@ -5,10 +5,12 @@ import express from "express";
 
 //Modules
 import connectToDatabase from "./db.js";
+import productModel from "./dao/models/products.model.js";
 
-//Set
-const app = express();
+//App Set
 const PORT = 8080;
+const app = express();
+
 
 
 
