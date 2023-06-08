@@ -1,21 +1,21 @@
 //Práctica Integradora 1
 
-//imports
+//Dependencies
 import express from "express";
+
+//Modules
 import connectToDatabase from "./db.js";
 
 //Set
 const app = express();
 const PORT = 8080;
-connectToDatabase();
+
 
 
 
 //listen
-
-
 app.listen(PORT, ()=>{
     console.log(`Server is running on ${PORT}`);  
-   
+    connectToDatabase();
 })
 
