@@ -7,16 +7,7 @@ const productRouter = Router();
 
 productRouter.post ('/', async (req,res) => {
     let newPr = req.body;
-    let product = new productModel (newPr)
-    product.save()
-    .then(pr => {
-        res.status(201).send ({
-            msg:'producto guardado',
-            data: pr
-        })
-    })
-    .catch (err => console.log(err))
-    
+    let saveProduct = await productManager.addProducts(newPr)
 })
 
 export default productRouter

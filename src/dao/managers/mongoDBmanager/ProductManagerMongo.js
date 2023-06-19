@@ -2,8 +2,8 @@ import productModel from "../../models/products.model.js"
 
 class ProductManagerMongo {
     //CREATE (addProducts)
-    addProducts = async (product) =>{
-        const newProductSaveMongo = new productModel(product);
+    addProducts = async (newPr) =>{
+        const newProductSaveMongo = new productModel(newPr);
         return newProductSaveMongo.save()
     }
 
