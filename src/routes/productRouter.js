@@ -5,9 +5,18 @@ import productModel from "../dao/models/products.model.js";
 const productManager = new ProductManagerMongo;
 const productRouter = Router();
 
+productRouter.get('/', async (req,res) =>{
+
+})
+
 productRouter.post ('/', async (req,res) => {
-    let newPr = req.body;
-    let saveProduct = await productManager.addProducts(newPr)
+    try {
+        let newPr = req.body;
+        let saveProduct = await productManager.addProducts(newPr)
+    } catch (error) {
+        console.log(error)
+    }
+   
 })
 
 export default productRouter

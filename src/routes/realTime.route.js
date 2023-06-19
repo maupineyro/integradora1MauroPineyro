@@ -1,3 +1,4 @@
+// esta ruta debe mostrar todos los productos en tiempo real en http://localhost:8080/realtimeproducts
 
 import {Router} from 'express';
 import ProductManagerMongo from '../dao/managers/mongoDBmanager/ProductManagerMongo.js';

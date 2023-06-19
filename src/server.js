@@ -40,12 +40,12 @@ app.use ('/realtimeproducts', realTimeRouter); //debe trabajar con webSocket y m
 app.use ("/api/products", productRouter); //debe manejar el crud de productos con diferentes rutas
 //app.use ("/api/cart", cartRouter);
 
-//socketgii
+
 //Socket IO
 const server = http.createServer(app);
 const io = new Server(server);
 
-const ProductManagerServer = new ProductManagerMongo
+const ProductManagerServer = new ProductManagerMongo;
 
  
 //socket (server)

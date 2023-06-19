@@ -1,3 +1,5 @@
+// esta ruta debe mostrar todos los productos al momento en http://localhost:8080/home
+
 import {Router} from 'express';
 import ProductManagerMongo from '../dao/managers/mongoDBmanager/ProductManagerMongo.js';
 
@@ -17,4 +19,4 @@ try {
 }   
 })
 
-export default homeRouter
+export default homeRouter 
