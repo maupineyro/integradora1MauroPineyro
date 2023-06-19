@@ -1,4 +1,4 @@
-import express from 'express';
+
 import {Router} from 'express';
 import ProductManagerMongo from '../dao/managers/mongoDBmanager/ProductManagerMongo.js';
 
@@ -15,12 +15,5 @@ realTimeRouter.get ('/', async (req, res) =>{
         
     })
 })
-
-realTimeRouter.post ('/', async (req, res) =>{
-    
-    const newProductSaved = await productManagerMongo.addProducts()
-    res.send ('producto guardado en DB')
-})
-
 
 export default realTimeRouter

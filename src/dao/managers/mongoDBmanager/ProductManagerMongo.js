@@ -3,8 +3,8 @@ import productModel from "../../models/products.model.js"
 class ProductManagerMongo {
     //CREATE (addProducts)
     addProducts = async (product) =>{
-        const newProduct = new productModel(product);
-        return newProduct.save()
+        const newProductSaveMongo = new productModel(product);
+        return newProductSaveMongo.save()
     }
 
     //READ (getProductById y getProducts)

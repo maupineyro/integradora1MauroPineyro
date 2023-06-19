@@ -7,10 +7,10 @@ const productManager = new ProductManagerMongo;
 //get
 homeRouter.get ('/', async (req, res) =>{
 try {
-    const products = await productManager.getProducts();
+    const AllProducts = await productManager.getProducts();
     res.render ('home', { 
         documentTitle: "WebSockets & Handlebars",
-        products: products
+        products: AllProducts
     })
 } catch (error) {
     console.log(error);
