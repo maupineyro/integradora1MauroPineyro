@@ -33,6 +33,16 @@ cartRouter.get ('/', async (req,res)=>{
 //get cart by Id
 cartRouter.get ('/:cid', async (req,res)=>{
     
+    try {
+        let cid = req.params.cid;
+        console.log(await cid)
+       const singleCart = await cartManager.getCartById(cid);
+       res.status(200).send(singleCart);
+    } catch (error) {
+        res.status(500).send(`se sufre este ${error}`)   
+    }
+
+    
 })
 
 

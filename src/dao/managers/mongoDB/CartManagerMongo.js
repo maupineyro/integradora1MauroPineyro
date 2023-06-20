@@ -27,6 +27,12 @@ class CartManagerMongo{
     }   
 
     getCartById = async (id) =>{
+        try {
+            const CartByID = await cartModel.findById(id).exec();
+            return CartByID;
+        } catch (error) {
+            console.log (error);
+        }
 
     }   
 
