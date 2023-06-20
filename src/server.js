@@ -23,7 +23,7 @@ import ProductManagerMongo from "./dao/managers/mongoDB/ProductManagerMongo.js";
 const PORT = 8080;
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({extended:true}));
 app.engine ("handlebars", engine());
 app.set ("view engine", "handlebars");
 app.set ("views", __dirNameViews);
@@ -32,13 +32,13 @@ app.set ("views", __dirNameViews);
 app.use(express.static(__dirNamePublic));
 
 //morgan
-app.use(morgan('dev')) //para chequear peticiones get post etc
+app.use(morgan('dev')) //para chequear peticiones get post etc por consola
 
 //App Routes
 app.use ('/home', homeRouter); //debe mostrar todos los productos agregados hasta el momento
 app.use ('/realtimeproducts', realTimeRouter); //debe trabajar con webSocket y mostrar cambios a tiempo real
 app.use ("/api/products", productRouter); //debe manejar el crud de productos con diferentes rutas
-app.use ("/api/products/:pid", productRouter);
+
 //app.use ("/api/cart", cartRouter);
 
 
