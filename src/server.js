@@ -16,7 +16,7 @@ import homeRouter from "./routes/home.route.js";
 import realTimeRouter from "./routes/realTime.route.js";
 import productRouter from "./routes/productRouter.js";
 import ProductManagerMongo from "./dao/managers/mongoDB/ProductManagerMongo.js";
-//import cartRouter from "./routes/cartRouter.js";
+import cartRouter from "./routes/carts.route.js";
 
 
 //App Set
@@ -38,8 +38,7 @@ app.use(morgan('dev')) //para chequear peticiones get post etc por consola
 app.use ('/home', homeRouter); //debe mostrar todos los productos agregados hasta el momento
 app.use ('/realtimeproducts', realTimeRouter); //debe trabajar con webSocket y mostrar cambios a tiempo real
 app.use ("/api/products", productRouter); //debe manejar el crud de productos con diferentes rutas
-
-//app.use ("/api/cart", cartRouter);
+app.use ("/api/cart", cartRouter);
 
 
 //Socket IO
