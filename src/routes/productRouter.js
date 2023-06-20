@@ -2,10 +2,13 @@
 //debe mostrar el listado de productos como "objetos" y permitirme el manejo con thunderclient o postman
 
 import { Router } from "express";
+import productModel from "../dao/models/products.model.js";
 import ProductManagerMongo from "../dao/managers/mongoDB/ProductManagerMongo.js";
+
 
 const productManager = new ProductManagerMongo;
 const productRouter = Router();
+
 
 //get
 productRouter.get('/', async (req,res) =>{
@@ -31,10 +34,13 @@ productRouter.get('/:pid',async (req,res)=>{
 //post
 productRouter.post ('/', async (req,res) => {
     try {
-        let newPr = req.body;
-        let saveProduct = await productManager.addProducts(newPr)
+        let newPr = await productManager.addProducts(req.body);
+        res.status(201).send({newPr}) 
+        
+
+  
     } catch (error) {
-        console.log(error)
+        res.status(500).send(`se sufre este ${error}`)
     }
    
 })

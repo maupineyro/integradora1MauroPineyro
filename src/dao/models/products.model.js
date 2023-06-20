@@ -19,7 +19,7 @@ const ProductSchema = new mongoose.Schema({ //acá tengo que poner el esquema de
         required: true,
     },
     category:{
-        type: Number,
+        type: String,
         required: true,
     },
     status:{
