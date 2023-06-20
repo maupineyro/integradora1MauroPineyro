@@ -30,7 +30,19 @@ class ProductManagerMongo {
 
 
     //DELETE (deleteProductById)
+    deleteProductById = async(id) =>{
+        try {
+            const FindProductById = await productModel.findById(id);
+            if (!FindProductById) return
+            const deleteProductById = await FindProductById.deleteOne();
+            console.log(`el producto ${FindProductById} fue eliminado`)
+            
 
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 }
 

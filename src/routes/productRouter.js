@@ -2,7 +2,6 @@
 //debe mostrar el listado de productos como "objetos" y permitirme el manejo con thunderclient o postman
 
 import { Router } from "express";
-import productModel from "../dao/models/products.model.js";
 import ProductManagerMongo from "../dao/managers/mongoDB/ProductManagerMongo.js";
 
 
@@ -45,6 +44,18 @@ productRouter.post ('/', async (req,res) => {
    
 })
 
+//delete
+productRouter.delete ('/:pid', async (req,res) => {
+    let pid = req.params.pid;
+    try {
+        let deleted = await productManager.deleteProductById(pid)
+        res.status(201).send(`el producto fue eliminado`) 
+        
+    } catch (error) {
+        res.status(500).send(`se sufre este ${error}`)
+    }
+   
+})
 
 
 export default productRouter
