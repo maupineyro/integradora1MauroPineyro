@@ -15,7 +15,7 @@ import __dirNamePublic from "./public/publicDirName.js";
 import homeRouter from "./routes/home.route.js";
 import realTimeRouter from "./routes/realTime.route.js";
 import productRouter from "./routes/productRouter.js";
-import ProductManagerMongo from "./dao/managers/mongoDBmanager/ProductManagerMongo.js";
+import ProductManagerMongo from "./dao/managers/mongoDB/ProductManagerMongo.js";
 //import cartRouter from "./routes/cartRouter.js";
 
 
@@ -38,6 +38,7 @@ app.use(morgan('dev')) //para chequear peticiones get post etc
 app.use ('/home', homeRouter); //debe mostrar todos los productos agregados hasta el momento
 app.use ('/realtimeproducts', realTimeRouter); //debe trabajar con webSocket y mostrar cambios a tiempo real
 app.use ("/api/products", productRouter); //debe manejar el crud de productos con diferentes rutas
+app.use ("/api/products/:pid", productRouter);
 //app.use ("/api/cart", cartRouter);
 
 
@@ -58,16 +59,18 @@ io.on ('connection', async (socket) =>{ // metodo on, escucha eventos, en este c
   io.emit('updatedProducts', products); // Emite la lista de productos actual a todos los clientes
     
 
-    socket.on('newProduct', (newProduct)=>{ //debe escuchar el evento emitido por el cliente que trae el objeto newProduct
+    socket.on('newProduct', async (newProduct)=>{ //debe escuchar el evento emitido por el cliente que trae el objeto newProduct
         ProductManagerServer.addProducts(newProduct);
         console.log("el producto enviado via socket es:", newProduct);
-
+        let RTProducts = await ProductManagerServer.getProducts();
+         io.emit('updatedProducts', RTProducts); // Emite la lista de productos actual a todos los clientes
     })
 
-    socket.on ('deleteProduct' , (productId) =>{
+    socket.on ('deleteProduct', async (productId) =>{
         ProductManagerServer.deleteProducts(productId);
         console.log ("el producto ha sido eliminado");
-        io.emit('updatedProducts', products);
+        let RTProducts = await ProductManagerServer.getProducts();
+        io.emit('updatedProducts', RTProducts);
     })
 
  })

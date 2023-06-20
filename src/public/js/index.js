@@ -1,7 +1,7 @@
 //este es el index.js de cliente
 
 //socket (cliente)
-let socket = io ()// este ya genera la conexión del evento 'connection'
+let socket = io()// este ya genera la conexión del evento 'connection'
 
 //añadir product
 const productForm = document.getElementById('productForm');
@@ -29,6 +29,11 @@ const productForm = document.getElementById('productForm');
     render(products); // Actualizar la galería de productos en el cliente
   });
 
+
+ socket.on('updatedProducts', (products) => {// Escuchar el evento 'initialProducts'
+   
+    render(products); // Actualizar la galería de productos en el cliente
+  });  
   //eliminar product
   const deleteForm = document.getElementById('deleteForm');
   const idInput = document.getElementById('idInput');

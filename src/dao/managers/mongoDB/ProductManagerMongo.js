@@ -5,13 +5,22 @@ class ProductManagerMongo {
     addProducts = async (newPr) =>{
         const newProductSaveMongo = new productModel(newPr).save();
         return newProductSaveMongo
-    }
+    };
 
     //READ (getProductById y getProducts)
     getProducts = async () =>{
         try {
             const AllProducts = await productModel.find().lean().exec();
             return AllProducts;
+        } catch (error) {
+            console.log(error)
+        };
+    };
+
+    getProductById = async (id) =>{
+        try {
+            const ProductById = await productModel.findById(id).exec();
+            return ProductById;
         } catch (error) {
             console.log(error)
         }

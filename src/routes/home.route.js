@@ -1,7 +1,7 @@
 // esta ruta debe mostrar todos los productos al momento en http://localhost:8080/home
 
 import {Router} from 'express';
-import ProductManagerMongo from '../dao/managers/mongoDBmanager/ProductManagerMongo.js';
+import ProductManagerMongo from '../dao/managers/mongoDB/ProductManagerMongo.js';
 
 const homeRouter = Router();
 const productManager = new ProductManagerMongo;
@@ -11,7 +11,7 @@ homeRouter.get ('/', async (req, res) =>{
 try {
     const AllProducts = await productManager.getProducts();
     res.render ('home', { 
-        documentTitle: "WebSockets & Handlebars",
+        documentTitle: "Ecommerce - Home",
         products: AllProducts
     })
 } catch (error) {
