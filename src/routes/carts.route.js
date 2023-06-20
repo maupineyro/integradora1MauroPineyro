@@ -20,7 +20,13 @@ try {
 
 //get
 cartRouter.get ('/', async (req,res)=>{
-    
+    try {
+        const AllCarts = await cartManager.getCarts();
+        res.status(200).send(AllCarts);
+    } catch (error) {
+        res.status(500).send(`se sufre este ${error}`)  
+    }
+   
 })
 
 
