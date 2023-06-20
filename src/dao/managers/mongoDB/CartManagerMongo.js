@@ -6,7 +6,8 @@ class CartManagerMongo{
     addCart = async (cart)=>{
         const productId = cart.product;// este será el id de producto (pid)
         const productQuantity = cart.quantity; // cantidad de un mismo product
-        const newCart = new cartModel({products:[{product: productId, quantity: productQuantity}]}) // el cid lo genera mongo
+        //{product: productId, quantity: productQuantity} esto iría dentro del array products revisar
+        const newCart = new cartModel({products:[]}) // el cid lo genera mongo
         try {
             const savedCart = await newCart.save();
             return savedCart;
