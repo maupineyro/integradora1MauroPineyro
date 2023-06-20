@@ -27,18 +27,25 @@ class ProductManagerMongo {
     }
 
     //UPDATE (updateProductByID)
-
+    updateProductByID = async (id, newProps) =>{
+       
+        try {
+            const FindProductById = await productModel.findById(id);
+            if (!FindProductById) return "id de producto no encontrado";
+            const updatedProduct = await productModel.findByIdAndUpdate(id, newProps, {new:true, runValidators:true}).exec();
+            return updatedProduct;
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     //DELETE (deleteProductById)
     deleteProductById = async(id) =>{
         try {
             const FindProductById = await productModel.findById(id);
-            if (!FindProductById) return
-            const deleteProductById = await FindProductById.deleteOne();
-            console.log(`el producto ${FindProductById} fue eliminado`)
-            
-
-            
+            if (!FindProductById) return "id de producto no encontrado"
+            const deleteProduct = await FindProductById.deleteOne();
+            console.log(`el producto ${FindProductById} fue eliminado`);            
         } catch (error) {
             console.log(error)
         }
