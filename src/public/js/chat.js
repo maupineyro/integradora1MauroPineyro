@@ -1,19 +1,40 @@
 //este es el chat.js de cliente
 
 const socket = io()
-let user; 
-Swal.fire({
-  title: "Identificate",
-  input:"text",
-  text: "Por favor ingresa tu nombre..",
-inputValidator: (value)=>{
-  return !value && "¡Necesitas escribir un nombre de usuario para continuar"
-},
-allowOutsideClick:false //impide que el usuario salga de la alerta 
 
-})
-.then(result=>{
-  user = result.value;
-  console.log(user);
-  //Una vez que el usuario se identifica, lo asignamos a la variable user.
-})
+function getChatForm(){
+  const newMsg ={
+    user: document.getElementById('user').value,
+    message: document.getElementById('message').value
+  }
+  socket.emit('newMessage', newMsg);
+  return false ;
+}
+
+const chat = document.getElementById('chat');
+  chat.addEventListener('submit', (e) => {
+        e.preventDefault();
+        chat.reset();
+      }
+  )
+
+  socket.on('allMessages', (data) => {
+        
+        renderMessage(data)
+  })
+      
+
+//function render
+function renderMessage(data) {
+        let html = data.map(elem => {
+            return `
+            <div class = "container">
+            </div>
+            <div class="container chat mx-4 my-2">
+                <strong>${elem.user}</strong> dice <em>${elem.message}</em>
+            </div>
+            `;
+        })
+        .join(' ')
+        document.getElementById('boxChat').innerHTML = html
+    }

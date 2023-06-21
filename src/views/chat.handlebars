@@ -3,29 +3,28 @@
         <div class="col-lg-6 bg-info">{{!--//inicia el col izq--}}
             <div class="text-center my-2">
             <h1>Chat</h1>
-            <div id="box"></div>
             </div>
-            <div>
-            <form onsubmit="return addmessage()">
-            <div class="mb-3">
-            <input type="text" class="form-control" id="username" placeholder="Tu nombre...">
-            </div>
-            <div class="mb-3">
-            <textarea class="form-control" id="texto" rows="5" placeholder="Tu mensaje..."></textarea>
-            </div>
-            <input type="submit" value="Enviar" class="btn btn-primary mb-3">
-            </form>
+
+            <div >
+              <form  id="chat" onsubmit="return getChatForm()">
+                <div class="mb-3">
+                <input type="text" class="form-control" id="user" placeholder="Tu nombre...">
+                </div>
+                <div class="mb-3">
+                <textarea class="form-control" id="message" rows="5" placeholder="Tu mensaje..."></textarea>
+                </div>
+                <input type="submit" value="Enviar" class="btn btn-primary mb-3">
+              </form>
             </div>
         </div>{{!--//cierra el col izq--}}
         <div class="col-lg-6 bg-warning">{{!--//inicia el col der--}}
             <div class="text-center my-2">
                 <h1>Historial</h1>
             </div>
+            <div id="boxChat"></div>
         </div>{{!--//cierra el col der--}}
     </div>{{!--//cierra el row--}}   
 </div>{{!--//cierra el container--}}
 
-
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/chat.js"></script>
