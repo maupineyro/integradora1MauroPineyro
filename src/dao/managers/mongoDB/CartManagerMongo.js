@@ -38,12 +38,12 @@ class CartManagerMongo{
 
 //update
     updateCartById = async (id, newProps) =>{
-
+        //creo que pertenece a la próxima entrega,investigar
     }
 
 //delete
     deleteCartById = async (id) => {
-
+        //creo que pertenece a la próxima entrega, investigar
     }
 }//finaliza la class CartManagerMongo
 

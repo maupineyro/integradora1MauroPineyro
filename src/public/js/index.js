@@ -19,14 +19,18 @@ const productForm = document.getElementById('productForm');
         thumbnail:document.getElementById('productImage').value,
         //id se debe agregar auto con el método
       };
-
-      socket.emit('newProduct', newProduct); // Enviar datos del producto al servidor
+      if(newProduct.title && newProduct.description && newProduct.code && newProduct.price && 
+         newProduct.stock && newProduct.category &&newProduct.thumbnail) {
+            socket.emit('newProduct', newProduct); // Enviar datos del producto al servidor
+      }
+      
       productForm.reset(); // Limpiar el formulario
     });
   
-  socket.on('initialProducts', (products) => {// Escuchar el evento 'initialProducts'
+    //el render inicial
+  socket.on('initialProducts', (initialProducts) => {//este escucha el evento 'initialProducts'
    
-    render(products); // Actualizar la galería de productos en el cliente
+    render(initialProducts); // renderiza los productos la primera vez
   });
 
 
@@ -34,6 +38,8 @@ const productForm = document.getElementById('productForm');
    
     render(products); // Actualizar la galería de productos en el cliente
   });  
+
+
   //eliminar product
   const deleteForm = document.getElementById('deleteForm');
   const idInput = document.getElementById('idInput');
@@ -69,7 +75,6 @@ function toggleDescripcion(button) {
 
   //render realtime
   function render(products){
-
     const html = products.map (elem =>{
       return (`
       <div class="card">

@@ -10,12 +10,12 @@ import morgan from "morgan";
 import { connectToDatabase } from "./dao/db.js";
 import __dirNameViews from "./views/solutionDirName.js";
 import __dirNamePublic from "./public/publicDirName.js";
+import socketProducts from "./sockets/socketProducts.js";
 
 //Import Routes
 import homeRouter from "./routes/home.route.js";
 import realTimeRouter from "./routes/realTime.route.js";
 import productRouter from "./routes/productRouter.js";
-import ProductManagerMongo from "./dao/managers/mongoDB/ProductManagerMongo.js";
 import cartRouter from "./routes/carts.route.js";
 
 
@@ -44,35 +44,9 @@ app.use ("/api/cart", cartRouter);
 //Socket IO
 const server = http.createServer(app);
 const io = new Server(server);
-
-const ProductManagerServer = new ProductManagerMongo;
-
+socketProducts(io);
  
-//socket (server)
-io.on ('connection', async (socket) =>{ // metodo on, escucha eventos, en este caso el evento 'connection'
-    console.log ('connection: User conectado');
-    
-    const products = await ProductManagerServer.getProducts();
-    
-  socket.emit('initialProducts', products); // Emite la lista de productos actual al cliente que se conecta
-  io.emit('updatedProducts', products); // Emite la lista de productos actual a todos los clientes
-    
-
-    socket.on('newProduct', async (newProduct)=>{ //debe escuchar el evento emitido por el cliente que trae el objeto newProduct
-        ProductManagerServer.addProducts(newProduct);
-        console.log("el producto enviado via socket es:", newProduct);
-        let RTProducts = await ProductManagerServer.getProducts();
-         io.emit('updatedProducts', RTProducts); // Emite la lista de productos actual a todos los clientes
-    })
-
-    socket.on ('deleteProduct', async (productId) =>{
-        ProductManagerServer.deleteProducts(productId);
-        console.log ("el producto ha sido eliminado");
-        let RTProducts = await ProductManagerServer.getProducts();
-        io.emit('updatedProducts', RTProducts);
-    })
-
- })
+  
 
 
 //listen y DB
