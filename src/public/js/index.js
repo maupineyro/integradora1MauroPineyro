@@ -26,21 +26,8 @@ const productForm = document.getElementById('productForm');
       
       productForm.reset(); // Limpiar el formulario
     });
-  
-    //el render inicial
-  socket.on('initialProducts', (initialProducts) => {//este escucha el evento 'initialProducts'
-   
-    render(initialProducts); // renderiza los productos la primera vez
-  });
 
-
- socket.on('updatedProducts', (products) => {// Escuchar el evento 'initialProducts'
-   
-    render(products); // Actualizar la galería de productos en el cliente
-  });  
-
-
-  //eliminar product
+    //eliminar product
   const deleteForm = document.getElementById('deleteForm');
   const idInput = document.getElementById('idInput');
   const deleteButton = document.getElementById('deleteButton');
@@ -54,6 +41,17 @@ const productForm = document.getElementById('productForm');
   });
 
 
+    //el render inicial
+  socket.on('initialProducts', (initialProducts) => {//este escucha el evento 'initialProducts'
+   
+    render(initialProducts); // renderiza los productos la primera vez
+  });
+
+  //el render cuando updatea
+ socket.on('updatedProducts', (products) => {// Escuchar el evento 'updatedProducts'
+   
+    render(products); // Actualizar la galería de productos en el cliente
+  });  
 
     
 //funciones

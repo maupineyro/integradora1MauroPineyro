@@ -14,12 +14,14 @@ const socketProducts = async(io) =>{
             await productManager.addProducts(newProduct)
             const products = await productManager.getProducts();
             socket.emit('updatedProducts', products);
+             io.emit ('updatedProducts', products) //Emite para todos los sockets
         })//escucha el evento newProduct y luego de agregar, emite la actualización al agregar
 
         socket.on ('deleteProduct', async (productId) =>{
             await productManager.deleteProductById(productId);
             const products = await productManager.getProducts();
-            socket.emit('updatedProducts', products)
+            socket.emit('updatedProducts', products);
+            io.emit ('updatedProducts', products) //Emite para todos los sockets
         })  //escucha el evento deleteProduct y emite la actualización al borrar 
     })
 }// cierra socketProducts
