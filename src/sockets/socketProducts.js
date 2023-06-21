@@ -7,7 +7,7 @@ const socketProducts = async(io) =>{
     
     io.on ('connection', async (socket) =>{ // metodo on, escucha el evento 'connection'
         const initialProducts = await productManager.getProducts();
-        console.log ('connection: User conectado');
+        console.log ('connection: User connected');
         socket.emit('initialProducts', initialProducts); // Emite la lista de productos actual al cliente que se conecta
   
         socket.on('newProduct', async (newProduct)=>{ 
