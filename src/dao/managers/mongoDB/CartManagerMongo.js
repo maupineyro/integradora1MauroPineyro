@@ -41,10 +41,21 @@ class CartManagerMongo{
         //ver clase mongo avanzado I
         try {
             const chooseCart = await this.getCartById(cid);
-            chooseCart.products.push({product: pid}); 
-            console.log(chooseCart)   
-            await cartModel.updateOne({_id: cid},chooseCart)   
+            //chooseCart.products.push({product:{_id: pid}} ); 
+            //console.log(chooseCart)   
+            //await cartModel.updateOne({_id: cid},chooseCart)
 
+            //agrego una comparación de index para ver si existe
+            const fIndex = chooseCart.products.findIndex(prod => prod.product.toString()=== pid)
+            if(fIndex === -1){//significa que no lo encontró
+                //const add = {$push:{products:{product:{_id:pid},quantity:1}}}
+                const add = { $push: { products: { product: pid, quantity: 1 } } };
+                await cartModel.updateOne({_id: cid}, add) 
+            } else {
+                // El producto ya existe en el carrito, se incrementa la cantidad
+                  const incrementQuantity = { $inc: { "products.$.quantity": 1 } };
+                await cartModel.updateOne({ _id: cid, "products.product": pid }, incrementQuantity);
+            }   
         } catch (error) {
             console.log(error);
         }
