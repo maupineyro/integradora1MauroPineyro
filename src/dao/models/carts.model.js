@@ -4,12 +4,13 @@ const cartsSchema = new mongoose.Schema ({
     //el id de carrito lo genera mongo
     products:{
         type: [
-            {
+            {// estas llaves es el objeto de un producto,que tiene que tener su product id y la cantidad.
             product:{
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'Product'
-              }
-            }
+                ref: 'product'
+              },
+              quantity: Number
+            }// cierra al objeto de producto
           ]  
         }
 });

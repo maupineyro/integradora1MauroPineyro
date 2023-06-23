@@ -35,8 +35,8 @@ cartRouter.get ('/:cid', async (req,res)=>{
     
     try {
         let cid = req.params.cid;
-        console.log(cid)
        const singleCart = await cartManager.getCartById(cid);
+       if (!singleCart) return "carrito no encontrado";
        res.status(200).send(singleCart);
     } catch (error) {
         res.status(500).send(`se sufre este ${error}`)   
@@ -44,6 +44,25 @@ cartRouter.get ('/:cid', async (req,res)=>{
 
     
 })
+
+
+//post (product en carrito)
+
+cartRouter.post ('/:cid/products/:pid', async (req,res)=>{
+    
+    try {
+        let cid = req.params.cid;
+        let pid = req.params.pid;
+        const productAddedToCart = await cartManager.addProductToCart(cid,pid);
+
+        res.status(200).send(productAddedToCart);
+    } catch (error) {
+        res.status(500).send(`se sufre este ${error}`)   
+    }
+
+    
+})
+
 
 
 export default cartRouter

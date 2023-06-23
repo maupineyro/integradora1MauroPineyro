@@ -28,13 +28,27 @@ class CartManagerMongo{
 
     getCartById = async (id) =>{
         try {
-            const CartByID = await cartModel.findById(id).exec();
+            const CartByID = await cartModel.findById(id).populate('products.product').exec();
             return CartByID;
         } catch (error) {
             console.log (error);
         }
 
-    }   
+    }  
+    
+//add product to cart
+    addProductToCart = async (cid,pid) => {
+        //ver clase mongo avanzado I
+        try {
+            const chooseCart = await this.getCartById(cid);
+            chooseCart.products.push({product: pid}); 
+            console.log(chooseCart)   
+            await cartModel.updateOne({_id: cid},chooseCart)   
+
+        } catch (error) {
+            console.log(error);
+        }
+    }    
 
 //update
     updateCartById = async (id, newProps) =>{
