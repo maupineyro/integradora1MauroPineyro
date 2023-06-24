@@ -11,9 +11,24 @@ const productRouter = Router();
 
 //get
 productRouter.get('/', async (req,res) =>{
+    const {page, limit}= req.query
 try {
-    const AllProducts = await productManager.getProducts();
-    res.status(200).send(AllProducts);
+    //const AllProducts = await productManager.getProducts();
+    //res.status(200).send(AllProducts);
+    const paginatedProducts = await productManager.getProducts(page, limit);
+    return res.status(200).json({
+        status: 'success',
+        payload: paginatedProducts.docs,
+        totalPages: paginatedProducts.totalPages,
+        prevPages: paginatedProducts.prevPage,
+        nextPages: paginatedProducts.nextPage,
+        page: paginatedProducts.page,
+        hasPrevPage: paginatedProducts.hasPrevPage,
+        hasNextPage: paginatedProducts.hasNextPage,
+        prevLink: paginatedProducts.hasPrevPage? `http://localhost:8080/api/products/?page=${paginatedProducts.prevPage}`: null,
+
+        nextLink: paginatedProducts.hasNextPage? `http://localhost:8080/api/products/?page=${paginatedProducts.nextPage}` : null,
+    })
 } catch (error) {
     res.status(500).send(`se sufre este ${error}`)
     }

@@ -8,10 +8,12 @@ class ProductManagerMongo {
     };
 
     //READ (getProductById y getProducts)
-    getProducts = async () =>{
+    getProducts = async (page,limit) =>{
         try {
-            const AllProducts = await productModel.find().lean().exec();
-            return AllProducts;
+            //const AllProducts = await productModel.find().lean().exec();
+            //return AllProducts;
+            const paginatedProducts = await productModel.paginate({},{limit: limit || 10, page: page || 1});
+            return paginatedProducts;
         } catch (error) {
             console.log(error)
         };
