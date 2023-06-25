@@ -4,9 +4,6 @@ class CartManagerMongo{
 
 //create
     addCart = async (cart)=>{
-        //const productId = cart.product;// este será el id de producto (pid)
-        //const productQuantity = cart.quantity; // cantidad de un mismo product
-        //{product: productId, quantity: productQuantity} esto iría dentro del array products revisar
         const newCart = new cartModel({products:[]}) // el cid lo genera mongo
         try {
             const savedCart = await newCart.save();
@@ -46,23 +43,37 @@ class CartManagerMongo{
                 const add = {$push:{products:{product:{_id:pid},quantity:1}}}
                 await cartModel.updateOne(chooseCart, add) 
                 return "producto agregado"
-           } else{
+           } else{// significa que encontró el pid dentro de products
                  const filter = { _id: cid, 'products.product': pid };
                 const update = { $inc: { 'products.$.quantity': 1 } };
                 await cartModel.updateOne(filter, update);
                 return "producto agregado"
            }
-                
-           
-             
         }  catch (error) {
             console.log(error);
         }
-    }    
+    }
+    
+    //deleteSingleProduct
+    deleteSingleProduct = async (cid, pid) =>{
+        try {
+            const chooseCart = await this.getCartById(cid);
+            const index = chooseCart.products.findIndex(prod => prod.product._id.toString() === pid);
+            if (index === -1){//no encuentra el pid
+                return `no se encuentra el producto ${pid} dentro del carrito ${cid}`
+            } else{ //si lo encuentra
+                const eraseProduct = {$pull: {products: { product: pid }}}
+                await cartModel.updateOne(chooseCart, eraseProduct)
+                return `el producto ${pid} ha sido eliminado del carrito ${cid}`
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 //update
     updateCartById = async (id, newProps) =>{
-        //creo que pertenece a la próxima entrega,investigar
+        //
     }
 
 //delete products en el cart elegido

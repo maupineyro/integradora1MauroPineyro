@@ -61,6 +61,20 @@ cartRouter.post ('/:cid/products/:pid', async (req,res)=>{
     } 
 })
 
+//delete un producto del carrito según su Id
+cartRouter.delete ('/:cid/products/:pid', async (req, res)=>{
+    try {
+        let cid = req.params.cid;
+        let pid = req.params.pid;
+        const deleteAProductFromCart = await cartManager.deleteSingleProduct(cid, pid);
+        res.status(200).send(deleteAProductFromCart);
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+
+
 cartRouter.delete('/:cid',async (req, res)=>{
     try {
         let cid = req.params.cid;
