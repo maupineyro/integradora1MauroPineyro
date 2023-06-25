@@ -16,6 +16,7 @@ try {
     //const AllProducts = await productManager.getProducts();
     //res.status(200).send(AllProducts);
     const paginatedProducts = await productManager.getProducts(page, limit);
+    
     return res.status(200).json({
         status: 'success',
         payload: paginatedProducts.docs,
@@ -33,6 +34,7 @@ try {
     res.status(500).send(`se sufre este ${error}`)
     }
 })
+//testeo: http://localhost:8080/api/products?limit=5&page=1
 
 //get by ID
 productRouter.get('/:pid',async (req,res)=>{
