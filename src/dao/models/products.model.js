@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import paginate from "mongoose-paginate-v2";
 
+
 const ProductSchema = new mongoose.Schema({ //acá tengo que poner el esquema de datos del objeto producto
     title:{
         type: String, 
@@ -36,6 +37,7 @@ const ProductSchema = new mongoose.Schema({ //acá tengo que poner el esquema de
 }) 
 
 ProductSchema.plugin(paginate);
+
 const productModel = mongoose.model('product', ProductSchema);
 
 export default productModel;

@@ -41,13 +41,19 @@ class CartManagerMongo{
         //ver clase mongo avanzado I
         try {
             const chooseCart = await this.getCartById(cid);
-            //chooseCart.products.push({product:{_id: pid}} ); 
-            //console.log(chooseCart)   
-            //await cartModel.updateOne({_id: cid},chooseCart)
+            const index = chooseCart.products.findIndex(prod => prod.product._id.toString() === pid)
+           if (index === -1){ // index -1 si no lo encuentra al pid
                 const add = {$push:{products:{product:{_id:pid},quantity:1}}}
-                //const add = { $push: { products: { product: pid, quantity: 1 } } };
-                await cartModel.updateOne({_id: cid}, add) 
+                await cartModel.updateOne(chooseCart, add) 
                 return "producto agregado"
+           } else{
+                 const filter = { _id: cid, 'products.product': pid };
+                const update = { $inc: { 'products.$.quantity': 1 } };
+                await cartModel.updateOne(filter, update);
+                return "producto agregado"
+           }
+                
+           
              
         }  catch (error) {
             console.log(error);
