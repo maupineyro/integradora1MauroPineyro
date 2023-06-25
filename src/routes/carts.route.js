@@ -58,9 +58,17 @@ cartRouter.post ('/:cid/products/:pid', async (req,res)=>{
         res.status(200).send(productAddedToCart);
     } catch (error) {
         res.status(500).send(`se sufre este ${error}`)   
-    }
+    } 
+})
 
-    
+cartRouter.delete('/:cid',async (req, res)=>{
+    try {
+        let cid = req.params.cid;
+        const deleteProducts = await cartManager.deleteAllProductsFromCart(cid);
+        res.status(200).send(deleteProducts)
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 

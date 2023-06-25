@@ -65,9 +65,16 @@ class CartManagerMongo{
         //creo que pertenece a la próxima entrega,investigar
     }
 
-//delete
-    deleteCartById = async (id) => {
-        //creo que pertenece a la próxima entrega, investigar
+//delete products en el cart elegido
+    deleteAllProductsFromCart = async (cid) => {
+        try {
+            const chooseCart = await this.getCartById(cid);
+            const resetCart = {$set: {products: []}};
+            await cartModel.updateOne(chooseCart,resetCart)
+            return `el carrito ${cid} fue vaciado`
+        } catch (error) {
+            console.log(error)
+        }
     }
 }//finaliza la class CartManagerMongo
 
