@@ -8,7 +8,7 @@ class ProductManagerMongo {
         return newProductSaveMongo
     };
 
-    //READ (getProductById y getProducts)
+    //READ (getProductById, getRealtimeProducts y getProducts)
     getProducts = async (page,limit) =>{
         try {
             //const AllProducts = await productModel.find().lean().exec();
@@ -19,6 +19,16 @@ class ProductManagerMongo {
             console.log(error)
         };
     };
+
+    getRealtimeProducts = async() => {
+        try {
+            const AllProducts = await productModel.find().lean().exec();
+            return AllProducts;
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     getProductById = async (id) =>{
         try {
