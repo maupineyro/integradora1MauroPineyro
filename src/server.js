@@ -50,7 +50,7 @@ app.use ('/chat', chatRouter); // debe mostrar el chat
 app.use ('/realtimeproducts', realTimeRouter); //debe trabajar con webSocket y mostrar cambios a tiempo real
 app.use ("/api/products", productRouter); //debe manejar el crud de productos con diferentes rutas
 app.use ("/api/carts", cartRouter); //debe manejar el crud de carrito
-app.use ("api/sessions",sessionRouter) // debe manejar el login, register, logout de sesiones
+app.use ("/api/sessions",sessionRouter) // debe manejar el login, register, logout de sesiones
 
 //Socket IO
 const server = http.createServer(app);
