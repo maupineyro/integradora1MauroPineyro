@@ -6,10 +6,6 @@ class UserManagerMongo {
     addUser = async (user)=>{
         try {
             const NewUser = await userModel.create(user);
-            const role = (email === 'adminCoder@coder.com' && password === admin2023) ? 'admin' : 'user';
-            if (role === admin){
-                NewUser.role = role
-            }
             return NewUser;
         } catch (error) {
             console.log(error)
