@@ -54,7 +54,7 @@ class CartManagerMongo{
         }
     }
     
-    //deleteSingleProduct
+//deleteSingleProduct
     deleteSingleProduct = async (cid, pid) =>{
         try {
             const chooseCart = await this.getCartById(cid);
@@ -71,11 +71,6 @@ class CartManagerMongo{
         }
     }
 
-//update
-    updateCartById = async (id, newProps) =>{
-        //
-    }
-
 //delete products en el cart elegido
     deleteAllProductsFromCart = async (cid) => {
         try {
@@ -87,6 +82,14 @@ class CartManagerMongo{
             console.log(error)
         }
     }
+
+//update
+    updateCartById = async (id, newProps) =>{
+        //
+    }
+
+
+
 }//finaliza la class CartManagerMongo
 
 export default CartManagerMongo

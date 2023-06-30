@@ -11,7 +11,9 @@ const productRouter = Router();
 
 //get
 productRouter.get('/', async (req,res) =>{
-    const {page, limit}= req.query
+    const limit= parseInt(req.query.limit) || 10;
+    const page = parseInt(req.query.page)  || 1;
+    const sort = parseInt(req.query.sort)  || 1;
 try {
     //const AllProducts = await productManager.getProducts();
     //res.status(200).send(AllProducts);
