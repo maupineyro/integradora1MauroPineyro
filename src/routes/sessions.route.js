@@ -3,7 +3,7 @@ import UserManagerMongo from "../dao/managers/mongoDB/UserManagerMongo.js";
 
 const sessionRouter = Router();
 const userManager = new UserManagerMongo;
-
+//Register get y post
 sessionRouter.get ('/register', async (req,res)=>{
     res.render('register', {})
 })
@@ -22,8 +22,22 @@ sessionRouter.post('/register', async (req,res)=>{
         }
         await userManager.addUser(user);
         return res.status(200).send({status: 'success', message:'usuario agregado correctamente'});
-        
+    } catch (error) {
+        console.log(error)
+    }
+})
 
+//login get y post
+sessionRouter.get ('/login', async (req,res)=>{
+    res.render('login', {})
+})
+
+sessionRouter.post('/login', async (req,res) => {
+    try {
+        const {email, password} = req.body;
+        const userRegisteredInDB = await userManager.getUserByLoginFields (email, password)
+        if (!userRegisteredInDB) return res.send({status:'error', message:'Usuario no encontrado: email o password incorrectos'});
+        return res.json(userRegisteredInDB)
     } catch (error) {
         console.log(error)
     }

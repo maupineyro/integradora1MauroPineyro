@@ -41,6 +41,15 @@ class UserManagerMongo {
         }
     }
 
+    getUserByLoginFields = async (email, password)=>{
+        try {
+            const UserLoginFields = await userModel.findOne ({email:email, password:password});// ({propiedad:parámetro, propiedad: parámetro})
+            return UserLoginFields;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 }// cierra la clase UserManag...
 
 export default UserManagerMongo;

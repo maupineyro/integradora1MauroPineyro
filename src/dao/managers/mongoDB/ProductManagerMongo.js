@@ -39,6 +39,8 @@ class ProductManagerMongo {
         }
     }
 
+    //agregar el getProductByCode para validar después si está repetido
+
     //UPDATE (updateProductByID)
     updateProductByID = async (id, newProps) =>{
        
