@@ -32,10 +32,26 @@ sessionRouter.post('/login', async (req,res) => {
         const {email, password} = req.body;
         const userRegisteredInDB = await userManager.getUserByLoginFields (email, password)
         if (!userRegisteredInDB) return res.send({status:'error', message:'Usuario no encontrado: email o password incorrectos'});
-        return res.json(userRegisteredInDB)
+        //return res.json(userRegisteredInDB)
+        req.session.user = {
+            email: userRegisteredInDB.email,
+            password: userRegisteredInDB.password,
+            role: userRegisteredInDB.role
+        }
+        //console.log(req.session.user)
+        res.redirect('/home')
+        
     } catch (error) {
-        console.log(error)
+        res.status(400).send({status:'error', message:`${error}`})
     }
+})
+
+
+sessionRouter.get('/logout', async (req,res)=>{
+    req.session.destroy(err =>{
+    if (err) return res.send({status: 'error', message: err})   
+    })
+    res.redirect('/login')
 })
 
 export default sessionRouter;
