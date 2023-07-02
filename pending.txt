@@ -1,0 +1,13 @@
+
+* agregar el update de carrito, y update de cantidad de producto del carrito
+* agregar la validación de código repetido al agregar un producto desde formulario
+* agregar vista de producto
+* agregar un botón que lleve a la vista individual de producto
+* agregar un botón de agregar al carrito en las cards de producto
+* agregar un setTimeOut para simular una demora al usar res.redirect en login/register
+* conectar los datos de user/admin a la vista profile.
+* revisar el paginate y el sort
+* eliminar console.logs y comentarios no explicativos
+* solucionar el problema de falta de css en páginas secundarias
+* mejorar el aspecto visual de la app
+* actualizar el readme

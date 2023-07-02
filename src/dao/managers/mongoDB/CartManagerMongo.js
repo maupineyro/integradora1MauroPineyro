@@ -83,9 +83,16 @@ class CartManagerMongo{
         }
     }
 
-//update
-    updateCartById = async (id, newProps) =>{
-        //
+//update cart, updatea el array de products
+    updateCartById = async (cid, products) =>{
+        try {
+            const chooseCart = await this.getCartById(cid);
+            const update = {$set:{products: products}};
+            await cartModel.updateOne(chooseCart,update);
+            return `el carrito ${cid} fue actualizado`
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
