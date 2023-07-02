@@ -1,6 +1,4 @@
-Práctica integradora 1
-
-- Objetivo general: Integrar MongoDB con lo realizado anteriormente.
+Proyecto de Backend(Coder)
 
 - Product Endpoints:
 
@@ -21,3 +19,9 @@ http://localhost:8080/api/carts - (POST) agrega un carrito
 http://localhost:8080/api/carts - (GET) trae todos los carritos
 
 http://localhost:8080/api/carts/:cid - (GET) trae el carrito seleccionado por Id
+
+- Session Endpoints
+
+http://localhost:8080/api/sessions/register
+
+http://localhost:8080/api/sessions/login

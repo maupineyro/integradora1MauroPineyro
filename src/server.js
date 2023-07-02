@@ -23,6 +23,7 @@ import productRouter from "./routes/productRouter.js";
 import cartRouter from "./routes/carts.route.js";
 import chatRouter from "./routes/chat.route.js";
 import sessionRouter from "./routes/sessions.route.js";
+import viewRouter from "./routes/views.router.js";
 
 //App Settings
 const app = express();
@@ -50,7 +51,8 @@ app.use ('/chat', chatRouter); // debe mostrar el chat
 app.use ('/realtimeproducts', realTimeRouter); //debe trabajar con webSocket y mostrar cambios a tiempo real
 app.use ("/api/products", productRouter); //debe manejar el crud de productos con diferentes rutas
 app.use ("/api/carts", cartRouter); //debe manejar el crud de carrito
-app.use ("/api/sessions",sessionRouter) // debe manejar el login, register, logout de sesiones
+app.use ("/api/sessions",sessionRouter) // debe manejar el post de login, register, logout de sesiones
+app.use ('/', viewRouter) //debe manejar la parte visible de login y register
 
 //Socket IO
 const server = http.createServer(app);
