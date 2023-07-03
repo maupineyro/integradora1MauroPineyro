@@ -1,13 +1,19 @@
-
-* agregar el update de carrito, y update de cantidad de producto del carrito
+- 2da pre-entrega
+* Revisar el update de carrito y update de cantidad de producto del carrito
 * agregar la validación de código repetido al agregar un producto desde formulario
 * agregar vista de producto
 * agregar un botón que lleve a la vista individual de producto
-* agregar un botón de agregar al carrito en las cards de producto
+* agregar un botón de "agregar al carrito" en las cards de producto
+* revisar los links de prev/next y el sort (conectar el sort al price)
+
+- entrega login:
+* agregar métodos de utilidad al userManager, como deleteUser
+* agregar validación de auth si login?
 * agregar un setTimeOut para simular una demora al usar res.redirect en login/register
 * conectar los datos de user/admin a la vista profile.
-* revisar el paginate y el sort
+
+-Pendientes generales
 * eliminar console.logs y comentarios no explicativos
-* solucionar el problema de falta de css en páginas secundarias
+* solucionar el problema de falta de css en páginas secundarias tipo /api/sessions/login
 * mejorar el aspecto visual de la app
 * actualizar el readme

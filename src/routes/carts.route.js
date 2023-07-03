@@ -1,4 +1,4 @@
-//debe manejar la ruta  (probar en thunderclient o postman)
+//debe manejar la ruta de cart (probar en thunderclient o postman)
 
 import { Router } from "express";
 import CartManagerMongo from "../dao/managers/mongoDB/CartManagerMongo.js";
@@ -71,7 +71,7 @@ cartRouter.delete ('/:cid/products/:pid', async (req, res)=>{
 
 
 //delete todos los productos del carrito seleccionado
-cartRouter.delete('/:cid',async (req, res)=>{
+cartRouter.delete('/:cid', async (req, res)=>{
     try {
         let cid = req.params.cid;
         const deleteProducts = await cartManager.deleteAllProductsFromCart(cid);
@@ -82,13 +82,30 @@ cartRouter.delete('/:cid',async (req, res)=>{
 })
 
 //update carrito
-cartRouter.put('/:cid',async(req,res)=>{
+cartRouter.put('/:cid', async(req,res)=>{
+    try {
+        let cid = req.params.cid;
+        let { products } =req.body;
+        const updatedCart = await cartManager.updateCartById(cid, products);
+        res.status(200).send(updatedCart);
 
+    } catch (error) {
+    console.log(error)
+    }
 })
 
-cartRouter.put('/:cid/products/:pid',async(req,res)=>{
 
+//update cantidad de un producto en el cart
+cartRouter.put('/:cid/products/:pid', async (req,res) => {
+    try {
+        let cid = req.params.cid;
+        let pid = req.params.pid;
+        let quantity = req.body.quantity;
+        const updatedQuantity = await cartManager.updateQuantity(cid, pid, quantity);
+        res.status(200).send(updatedQuantity)
+    } catch (error) {
+        console.log(error)
+    }
 })
-
 
 export default cartRouter

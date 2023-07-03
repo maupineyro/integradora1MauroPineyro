@@ -44,7 +44,7 @@ class CartManagerMongo{
                 await cartModel.updateOne(chooseCart, add) 
                 return "producto agregado"
            } else{// significa que encontró el pid dentro de products
-                 const filter = { _id: cid, 'products.product': pid };
+                const filter = { _id: cid, 'products.product': pid };
                 const update = { $inc: { 'products.$.quantity': 1 } };
                 await cartModel.updateOne(filter, update);
                 return "producto agregado"
@@ -95,7 +95,23 @@ class CartManagerMongo{
         }
     }
 
-
+//update quantity, agregando via post un quantity: value, debe actualizarse en el product y cart indicado.
+    updateQuantity = async (cid, pid, quantity) =>{
+        try {
+            const chooseCart = await this.getCartById(cid);
+            const index = chooseCart.products.findIndex(prod => prod.product._id.toString() === pid);
+            if (index === -1){//no lo encuentra al producto
+                return `no se encuentra el producto ${pid} dentro del carrito ${cid}`
+            } else {//si lo encuentra
+                const filter = { _id: cid, 'products.product': pid };
+                const updatedQty = { $set: { 'products.$.quantity': quantity } };
+                await cartModel.updateOne(filter, updatedQty);
+                return `la cantidad del producto ${pid} dentro del carrito ${cid} ha sido actualizada`
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 }//finaliza la class CartManagerMongo
 
