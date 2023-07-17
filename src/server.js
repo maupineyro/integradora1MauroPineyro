@@ -7,6 +7,7 @@ import {Server} from "socket.io";
 import morgan from "morgan";
 import session from "express-session";
 import MongoStore from 'connect-mongo';
+import passport from "passport";
 
 
 //Import Modules
@@ -15,6 +16,7 @@ import __dirNameViews from "./views/solutionDirName.js";
 import __dirNamePublic from "./public/publicDirName.js";
 import socketProducts from "./sockets/socketProducts.js";
 import socketChat from "./sockets/socketChat.js";
+import { InitPassport } from "./config/passport.config.js";
 
 //Import Routes
 import homeRouter from "./routes/home.route.js";
@@ -44,6 +46,12 @@ app.use(session ({
     resave: true,
     saveUninitialized: true
 }))
+
+//Passport
+InitPassport();
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 //App Routes
 app.use ('/home', homeRouter); //debe mostrar todos los productos agregados hasta el momento

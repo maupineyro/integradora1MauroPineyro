@@ -5,23 +5,28 @@ import { createHash, isValidPassword } from "./bcrypt.js";
 import {Strategy as GithubStrategy} from "passport-github2"
 
 const userManager = new UserManagerMongo();
-const localStrategy= local.Strategy
+const localStrategy = local.Strategy
 //local
 export const InitPassport = () =>{
-    passport.use('register', new localStrategy({passReqToCallback: true, usernameField:'email'},
-    async(req, username, password, done)=>{
-        const {email, password}= req.body;
+    passport.use('register', new localStrategy(
+        {passReqToCallback: true, usernameField:'email'},
+        async(req, username, password, done)=>{
         try {
+            let userData= req.body;
             const user = await userManager.getUserByEmail(username)
+            const role = (userData.email === 'adminCoder@coder.com' && userData.password === 'admin2023') ? 'admin' : 'user';
             if(user) return done(null,false) // si lo encuentra, no se puede volver a registrar
             const newUser = {
-                email: email,
-                password: createHash(password)
+                name: userData.name,
+                lastname: userData.lastname,
+                email: userData.email,
+                password: createHash(userData.password),
+                role: role
             }
             let result = await userManager.addUser(newUser)
             return done (null, result)
         } catch (error) {
-            return done(error)
+            return done('error al crear el usuario' + error)
             
         }
     }
@@ -45,8 +50,8 @@ export const InitPassport = () =>{
         done(null, user._id)
     })
 
-    passport.deserializeUser(async (_id, done) => {
-        let user = await userManager.getUserById(_id)
+    passport.deserializeUser(async (id, done) => {
+        let user = await userManager.getUserById(id)
         done(null, user)
     })
 }
@@ -54,5 +59,5 @@ export const InitPassport = () =>{
 
 //github
 export const initPassportGithub = ()=>{
-    
+
 }
