@@ -6,11 +6,11 @@ const sessionRouter = Router();
 const userManager = new UserManagerMongo;
 
 //Register
-sessionRouter.post('/register', passport.authenticate('register', {failureRedirect: '/RegisterFailed'}), async (req,res)=>{
+sessionRouter.post('/register', passport.authenticate('register', {failureRedirect: '/api/sessions/registerFailed'}), (req,res)=>{
     res.send ('Usuario registrado') 
 })
 
-sessionRouter.get('/RegisterFailed', async (req,res)=>{
+sessionRouter.get('/registerFailed', async (req, res)=>{
     res.send('Falla al registrar usuario')
 })
 

@@ -3,6 +3,7 @@ import local from "passport-local";
 import UserManagerMongo from "../dao/managers/mongoDB/UserManagerMongo.js";
 import { createHash, isValidPassword } from "./bcrypt.js";
 import {Strategy as GithubStrategy} from "passport-github2"
+import userModel from "../dao/models/users.model.js";
 
 const userManager = new UserManagerMongo();
 const localStrategy = local.Strategy
@@ -51,7 +52,7 @@ export const InitPassport = () =>{
     })
 
     passport.deserializeUser(async (id, done) => {
-        let user = await userManager.getUserById(id)
+        let user = await userModel.findById(id)
         done(null, user)
     })
 }

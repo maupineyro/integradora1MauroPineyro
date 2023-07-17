@@ -24,9 +24,9 @@ class UserManagerMongo {
 
     //Obtener usuario por ID, (uid = user id)
     
-    getUserById = async (uid) =>{
+    getUserById = async (id) =>{
         try {
-         const UserById = await userModel.findById({_id: uid});
+         const UserById = await userModel.findById({_id: id});
         } catch (error) {
             
         }
