@@ -47,7 +47,7 @@ export const InitPassport = () =>{
         new localStrategy( 
             {usernameField: 'email'},
         async (username, password, done) =>{
-        const userDB = await userManager.getUserByEmail(username);
+        const userDB = await userModel.findOne({email: username});
         try {
             if(!userDB) return done(null,false) // si no lo encuentra, no se puede loguear
             if(!isValidPassword(password, userDB)) return done (null,false)
