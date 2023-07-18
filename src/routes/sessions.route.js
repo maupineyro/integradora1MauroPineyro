@@ -29,8 +29,8 @@ sessionRouter.post('/login',passport.authenticate('login',{failureRedirect:'/api
    }
    console.log(req.session.user)
    let userlogged = req.session.user
-   res.render('profile', { user: userlogged });
-   
+   //res.render('profile', { user: userlogged });
+   res.redirect('/profile')
 
    //return res.json({msg:'ok', payload:req.user})
    
