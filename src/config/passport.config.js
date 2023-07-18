@@ -65,7 +65,6 @@ export const InitPassport = () =>{
                 clientID: GITHUB_CLIENT_ID,
                 clientSecret: GITHUB_CLIENT_SECRET,
                 callbackURL: 'http://localhost:8080/api/sessions/githubcallback'
-
             },
             async(accessToken, _, refreshToken, profile, done)=>{
               try {

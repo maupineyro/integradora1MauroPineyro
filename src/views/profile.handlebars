@@ -1,4 +1,13 @@
-
+{{#if user}}
+<div>
+<a href="http://localhost:8080/home">Home</a>
+</div>
 <div>
     <h1>hola</h1>
+    <p>Welcome, {{user.name}}!</p>
+    <p>Email: {{user.email}}</p>
+    <p>Role: {{user.role}}</p>
+
+    
 </div>
+{{/if}}

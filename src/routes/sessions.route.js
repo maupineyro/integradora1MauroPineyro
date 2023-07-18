@@ -28,7 +28,12 @@ sessionRouter.post('/login',passport.authenticate('login',{failureRedirect:'/api
     role: req.user.role
    }
    console.log(req.session.user)
-   return res.json({msg:'ok', payload:req.user})
+   let userlogged = req.session.user
+   res.render('profile', { user: userlogged });
+   
+
+   //return res.json({msg:'ok', payload:req.user})
+   
    //res.redirect('/home')
 })
 
@@ -42,6 +47,10 @@ sessionRouter.get('/github', passport.authenticate('github', {scope: ['user:emai
 sessionRouter.get('/githubcallback',passport.authenticate('github',{failureRedirect:'/login'}), async (req,res)=>{
     req.session.user = req.user;
     res.redirect('/home')
+})
+
+sessionRouter.get('/showsession', async (req,res)=>{
+    return res.send(JSON.stringify(req.session));
 })
 
 
