@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { accountLogged } from "../middlewares/auth.js";
 
 const viewRouter = Router();
 
@@ -16,7 +17,7 @@ viewRouter.get ('/login', async (req,res)=>{
     res.render('login', {})
 })
 
-viewRouter.get('/profile',async (req,res)  =>{
+viewRouter.get('/profile',accountLogged, async (req,res)  =>{
     let userlogged = await req.session.user
     res.render('profile',{user: userlogged})
 })
