@@ -36,6 +36,15 @@ sessionRouter.get('/failLogin', async (req,res)=>{
     return res.json({error: 'fail to login'})
 })
 
+//github  http://localhost:8080/api/sessions/github
+sessionRouter.get('/github', passport.authenticate('github', {scope: ['user:email']}));
+
+sessionRouter.get('/githubcallback',passport.authenticate('github',{failureRedirect:'/login'}), async (req,res)=>{
+    req.session.user = req.user;
+    res.redirect('/home')
+})
+
+
 //logout get
 sessionRouter.get('/logout', async (req,res)=>{
     req.session.destroy(err =>{

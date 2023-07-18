@@ -73,7 +73,7 @@ export const InitPassport = () =>{
                     headers:{
                         Accept:'application/vnd.github+json',
                         Authorization: 'Bearer ' + accessToken,
-                        'X-Github-Api-Version': '2022-11-28'
+                        'X-Github-Api-Version': '2022-11-28',
                     },
                 });
                 const emails = await res.json();
@@ -85,13 +85,14 @@ export const InitPassport = () =>{
                 profile.email = emailDetail.email;
 
                 let user = await userModel.findOne({email: profile.email});
+                const role = (profile.email === 'adminCoder@coder.com' && profile.password === 'admin2023') ? 'admin' : 'user';
                 if (!user) {
                     const newUser ={
                         name:profile._json.name || profile._json.login || 'noname',
                         lastname: 'nolast',
                         email: profile.email,
                         password: 'nopass',
-                        role,
+                        role:role
                     };
                     let userCreated = await userModel.create(newUser);
                     return done (null, userCreated)
