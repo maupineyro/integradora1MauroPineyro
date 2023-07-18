@@ -6,33 +6,34 @@ const sessionRouter = Router();
 const userManager = new UserManagerMongo;
 
 //Register
-sessionRouter.post('/register', passport.authenticate('register', {failureRedirect: '/api/sessions/registerFailed'}), (req,res)=>{
+sessionRouter.post('/register', passport.authenticate('register', {failureRedirect: '/api/sessions/failRegister'}), (req,res)=>{
     res.send ('Usuario registrado') 
 })
 
-sessionRouter.get('/registerFailed', async (req, res)=>{
+sessionRouter.get('/failRegister', async (req, res)=>{
     res.send('Falla al registrar usuario')
 })
 
 //login post
 
-sessionRouter.post('/login', async (req,res) => {
-    try {
-        const {email, password} = req.body;
-        const userRegisteredInDB = await userManager.getUserByLoginFields (email, password)
-        if (!userRegisteredInDB) return res.send({status:'error', message:'Usuario no encontrado: email o password incorrectos'});
-        //return res.json(userRegisteredInDB)
-        req.session.user = {
-            email: userRegisteredInDB.email,
-            password: userRegisteredInDB.password,
-            role: userRegisteredInDB.role
-        }
-        //console.log(req.session.user)
-        res.redirect('/home')
-        
-    } catch (error) {
-        res.status(400).send({status:'error', message:`${error}`})
-    }
+sessionRouter.post('/login',passport.authenticate('login',{failureRedirect:'/api/sessions/failLogin'}), async (req,res) => {
+   if (!req.user){
+    return res.json({error:'fail to login'})
+   }
+   req.session.user = {
+    _id: req.user._id,
+    name: req.user.name,
+    lastname:req.user.lastname,
+    email:req.user.email,
+    role: req.user.role
+   }
+   console.log(req.session.user)
+   return res.json({msg:'ok', payload:req.user})
+   //res.redirect('/home')
+})
+
+sessionRouter.get('/failLogin', async (req,res)=>{
+    return res.json({error: 'fail to login'})
 })
 
 //logout get

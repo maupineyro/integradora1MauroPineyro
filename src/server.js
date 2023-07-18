@@ -8,6 +8,7 @@ import morgan from "morgan";
 import session from "express-session";
 import MongoStore from 'connect-mongo';
 import passport from "passport";
+import dotenv from 'dotenv';
 
 
 //Import Modules
@@ -28,6 +29,7 @@ import sessionRouter from "./routes/sessions.route.js";
 import viewRouter from "./routes/views.router.js";
 
 //App Settings
+dotenv.config();
 const app = express();
 app.engine ("handlebars", engine());
 app.set ("view engine", "handlebars");
