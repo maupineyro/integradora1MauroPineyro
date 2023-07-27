@@ -1,9 +1,9 @@
 import { Router } from "express";
-import UserManagerMongo from "../dao/managers/mongoDB/UserManagerMongo.js";
 import passport from "passport";
+import { accountLogged } from "../middlewares/auth.js";
 
 const sessionRouter = Router();
-const userManager = new UserManagerMongo;
+
 
 //Register
 sessionRouter.post('/register', passport.authenticate('register', {failureRedirect: '/api/sessions/failRegister'}), (req,res)=>{
@@ -17,14 +17,14 @@ sessionRouter.get('/failRegister', async (req, res)=>{
 
 //login post
 
-sessionRouter.post('/login',passport.authenticate('login',{failureRedirect:'/api/sessions/failLogin'}), async (req,res) => {
+sessionRouter.post('/login', passport.authenticate('login',{failureRedirect:'/api/sessions/failLogin'}), async (req,res) => {
    if (!req.user){
     return res.json({error:'fail to login'})
    }
    req.session.user = {
     _id: req.user._id,
-    first_name: req.user.name,
-    last_name:req.user.lastname,
+    first_name: req.user.first_name,
+    last_name:req.user.last_name,
     email:req.user.email,
     age: req.user.age,
     cart:req.user.cart._id,
@@ -40,8 +40,9 @@ sessionRouter.post('/login',passport.authenticate('login',{failureRedirect:'/api
    //res.redirect('/home')
 })
 
-sessionRouter.get('/failLogin', async (req,res)=>{
-    return res.json({error: 'fail to login'})
+sessionRouter.get('/failLogin', accountLogged, async (req,res)=>{
+   // return res.json({error: 'fail to login'})
+  
 })
 
 //github  http://localhost:8080/api/sessions/github
@@ -53,7 +54,11 @@ sessionRouter.get('/githubcallback',passport.authenticate('github',{failureRedir
 })
 
 sessionRouter.get('/current', async (req,res)=>{
-    return res.send((req.session));
+    if(req.session.user){
+        return res.send((req.session.user));
+    }
+    return res.send({msg:"No hay sesión activa", payload:(req.session)})
+    
 })
 
 

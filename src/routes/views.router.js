@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { accountLogged } from "../middlewares/auth.js";
+import { accountLogged, redirectToHomeIfUserLogged } from "../middlewares/auth.js";
+
 
 const viewRouter = Router();
 
@@ -13,7 +14,7 @@ viewRouter.get ('/register', async (req,res)=>{
 
 
 
-viewRouter.get ('/login', async (req,res)=>{
+viewRouter.get ('/login',redirectToHomeIfUserLogged, async (req,res)=>{
     res.render('login', {})
 })
 
