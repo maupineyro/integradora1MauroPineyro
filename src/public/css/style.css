@@ -97,3 +97,8 @@ form {
     background-color: #fac24a;
     padding: 10px;
 }
+
+ul, a {
+    list-style: none;
+    text-decoration: none;
+}

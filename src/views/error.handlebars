@@ -1,4 +1,12 @@
-<h1>Error:</h1>
-{{error}}
-<a href="http://localhost:8080/home">Home</a>
-<a href="http://localhost:8080/api/sessions/logout">Cerrar Sesión</a>
+<div >
+    <h1 class="d-flex justify-content-center">Error:</h1>
+    <div class="my-5 d-flex justify-content-center" >
+    {{error}}
+    </div>
+</div>
+<div>
+ <ul class="d-flex justify-content-center" >
+    <li><a class="mx-3 card-button" href="http://localhost:8080/home">Home</a></li>
+    <li><a class="mx-3 card-button bg-danger" href="http://localhost:8080/api/sessions/logout">Cerrar Sesión</a></li>
+ </ul>   
+</div>

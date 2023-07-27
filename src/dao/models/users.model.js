@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema ({
-    name:{
+    first_name:{
         type: String, 
         
     },
 
-    lastname:{
+    last_name:{
         type: String,
     },
     
@@ -14,6 +14,10 @@ const UserSchema = new mongoose.Schema ({
         type: String, 
         required: true,
         unique: true
+    },
+
+    age:{
+        type: Number
     },
 
      password:{

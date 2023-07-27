@@ -25,3 +25,5 @@ http://localhost:8080/api/carts/:cid - (GET) trae el carrito seleccionado por Id
 http://localhost:8080/api/sessions/register
 
 http://localhost:8080/api/sessions/login
+
+http://localhost:8080/api/sessions/current

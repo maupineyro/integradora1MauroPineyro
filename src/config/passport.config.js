@@ -4,6 +4,7 @@ import UserManagerMongo from "../dao/managers/mongoDB/UserManagerMongo.js";
 import { createHash, isValidPassword } from "./bcrypt.js";
 import GithubStrategy from "passport-github2"
 import userModel from "../dao/models/users.model.js";
+import cartModel from "../dao/models/carts.model.js";
 import dotenv from 'dotenv';
 import fetch from "node-fetch";
 
@@ -23,14 +24,17 @@ export const InitPassport = () =>{
         async(req, username, password, done)=>{
             try {
             let userData= req.body;
-            const user = await userManager.getUserByEmail(username)
+            const user = await userManager.getUserByEmail(username);
+            const newCart = new cartModel({products:[]})
             const role = (userData.email === 'adminCoder@coder.com' && userData.password === 'admin2023') ? 'admin' : 'user';
             if(user) return done(null,false) // si lo encuentra, no se puede volver a registrar
-            const newUser = {
-                name: userData.name,
-                lastname: userData.lastname,
+            let newUser = {
+                first_name: userData.first_name,
+                last_name: userData.last_name,
                 email: userData.email,
+                age: userData.age,
                 password: createHash(userData.password),
+                cart: await newCart.save() ,
                 role: role
             }
             let result = await userManager.addUser(newUser)

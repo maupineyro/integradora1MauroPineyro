@@ -7,7 +7,8 @@ const userManager = new UserManagerMongo;
 
 //Register
 sessionRouter.post('/register', passport.authenticate('register', {failureRedirect: '/api/sessions/failRegister'}), (req,res)=>{
-    res.send ('Usuario registrado') 
+    
+    res.redirect('/login')
 })
 
 sessionRouter.get('/failRegister', async (req, res)=>{
@@ -22,9 +23,11 @@ sessionRouter.post('/login',passport.authenticate('login',{failureRedirect:'/api
    }
    req.session.user = {
     _id: req.user._id,
-    name: req.user.name,
-    lastname:req.user.lastname,
+    first_name: req.user.name,
+    last_name:req.user.lastname,
     email:req.user.email,
+    age: req.user.age,
+    cart:req.user.cart._id,
     role: req.user.role
    }
    console.log(req.session.user)
@@ -49,8 +52,8 @@ sessionRouter.get('/githubcallback',passport.authenticate('github',{failureRedir
     res.redirect('/home')
 })
 
-sessionRouter.get('/showsession', async (req,res)=>{
-    return res.send(JSON.stringify(req.session));
+sessionRouter.get('/current', async (req,res)=>{
+    return res.send((req.session));
 })
 
 
