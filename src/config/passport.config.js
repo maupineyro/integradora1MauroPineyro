@@ -88,13 +88,17 @@ export const InitPassport = () =>{
                 profile.email = emailDetail.email;
 
                 let user = await userModel.findOne({email: profile.email});
+                console.log (`github user: ${user}`)
+                const newCart = new cartModel({products:[]})
                 const role = (profile.email === 'adminCoder@coder.com' && profile.password === 'admin2023') ? 'admin' : 'user';
                 if (!user) {
                     const newUser ={
-                        name:profile._json.name || profile._json.login || 'noname',
-                        lastname: 'nolast',
+                        first_name:profile._json.name || profile._json.login || 'noname',
+                        last_name: 'nolast',
                         email: profile.email,
+                        age: profile._json.age || 99,
                         password: 'nopass',
+                        cart: await newCart.save(),
                         role:role
                     };
                     let userCreated = await userModel.create(newUser);
