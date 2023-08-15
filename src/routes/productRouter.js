@@ -4,7 +4,7 @@ import { Router } from "express";
 import { productController } from "../controllers/products.controller.js";
 const productRouter = Router();
 
-//Rutas de producto
+//Product Endpoints
 productRouter.get('/', productController.getAll ) //get
 
 productRouter.get('/:pid', productController.getProduct) //get by ID

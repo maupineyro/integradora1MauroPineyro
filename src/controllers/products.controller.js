@@ -1,4 +1,4 @@
-//debe tomar los req y devolver los res, usando el service.
+//debe tomar los req y devolver los res, usando el productService.
 
 import { productService } from "../services/products.service.js";
 
