@@ -88,7 +88,7 @@ export const InitPassport = () =>{
                 profile.email = emailDetail.email;
 
                 let user = await userModel.findOne({email: profile.email});
-                console.log (`github user: ${user}`)
+                //console.log (`github user: ${user}`)
                 const newCart = new cartModel({products:[]})
                 const role = (profile.email === 'adminCoder@coder.com' && profile.password === 'admin2023') ? 'admin' : 'user';
                 if (!user) {

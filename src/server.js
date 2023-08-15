@@ -54,7 +54,6 @@ InitPassport();
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 //App Routes
 app.use ('/home', homeRouter); //debe mostrar todos los productos agregados hasta el momento
 app.use ('/chat', chatRouter); // debe mostrar el chat

@@ -22,9 +22,13 @@
         <p class="card-id">ID: {{this._id}}</p>
         
         <p class="card-price"> precio: $ {{this.price}}</p>
-        <button class="card-button" onclick="toggleDescripcion(this)" data-visible="false">Mostrar descripción</button>
-        <p class="card-description">{{this.description}}</p>
-
+        <div class="d-flex flex-column mb-3">
+            <button class="card-button" onclick="toggleDescripcion(this)" data-visible="false">Mostrar descripción</button>
+            <p class="card-description">{{this.description}}</p>
+            <button class="card-button bg-warning" >Ver Producto</button>
+            <button class="card-button bg-success">Añadir al Carrito</button>
+        </div>
+       
     </div>
     {{/each}}
 
