@@ -1,0 +1,19 @@
+{{#if product}}
+<div class="card">
+    <img src="imagen.jpg" alt="Imagen" class="card-image">
+
+    <h2 class="card-title">{{product.title}}</h2>
+
+
+    <p class="card-id">ID: {{product._id}}</p>
+
+    <p class="card-price"> precio: $ {{product.price}}</p>
+    <div class="d-flex flex-column mb-3">
+       
+        <p class="card-description">{{product.description}}</p>
+       
+        <button class="card-button bg-success">Añadir al Carrito</button>
+    </div>
+
+</div>
+{{/if}}

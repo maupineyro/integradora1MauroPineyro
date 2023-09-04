@@ -42,7 +42,8 @@ class ProductController {
         try {
             const singleProduct = await productService.getProductById(pid);
             console.log("el detalle de pid es",singleProduct)
-            res.status(200).send(singleProduct);
+            //res.status(200).send(singleProduct);
+            res.status(200).render('singleProduct', { product: singleProduct }); 
         } catch (error) {
             res.status(500).send(`se sufre este ${error}`)
         }
