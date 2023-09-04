@@ -1,14 +1,17 @@
-- 2da pre-entrega
+-Pendientes generales
+
+* completar el config y el .env
+* crear el enlace al carrito y conectarle la view
+* hacer el factory y el switch persistence
+* conectar el userDto al Current.
+* completar el users controller y service
+* Hacer el ticket model
+* Crear toda la lógica del ticket
 * Revisar el update de carrito y update de cantidad de producto del carrito
 * agregar la validación de código repetido al agregar un producto desde formulario
-* agregar vista de producto según pid
-* agregar un botón que lleve a la vista individual de producto
-* agregar un botón de "agregar al carrito" en las cards de producto
 * revisar los links de prev/next y el sort (conectar el sort al price)
-
-
--Pendientes generales
+* crear el controlador y servicio del chat.
 * eliminar console.logs y comentarios no explicativos
 * solucionar el problema de falta de css en páginas secundarias tipo /api/sessions/login
-* mejorar el aspecto visual de la app
-* actualizar el readme
+
+

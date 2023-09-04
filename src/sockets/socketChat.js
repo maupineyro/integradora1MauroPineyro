@@ -2,6 +2,7 @@
 import messageModel from "../dao/models/messages.model.js";
 
 //estructurar el socket de chat
+
 const socketChat = async(io) =>{
     
     io.on ('connection', async (socket)=>{
