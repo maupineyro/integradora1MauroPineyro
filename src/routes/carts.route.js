@@ -1,7 +1,7 @@
 //debe manejar la ruta de cart (probar en thunderclient o postman)
 
 import { Router } from "express";
-import { cartController } from "../controllers/carts.controller";
+import { cartController } from "../controllers/carts.controller.js";
 
 const cartRouter = Router();
 
