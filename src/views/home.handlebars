@@ -25,7 +25,7 @@
         <div class="d-flex flex-column mb-3">
             <button class="card-button" onclick="toggleDescripcion(this)" data-visible="false">Mostrar descripción</button>
             <p class="card-description">{{this.description}}</p>
-            <button class="card-button bg-warning" >Ver Producto</button>
+            <button class="card-button bg-warning"  ><a href="api/products/{{this._id}}">Ver detalles</a></button>
             <button class="card-button bg-success">Añadir al Carrito</button>
         </div>
        

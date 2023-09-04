@@ -30,7 +30,7 @@ class ProductService {
 //
     getProductById = async (id) =>{
         try {
-            const ProductById = await productModel.findById(id).exec();
+            const ProductById = await productModel.findById(id).lean();
             return ProductById;
         } catch (error) {
             console.log(error)
