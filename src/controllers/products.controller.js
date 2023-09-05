@@ -39,11 +39,12 @@ class ProductController {
 //
     async getProduct (req, res){
         let pid = req.params.pid;
+        let currentUser = req.session.user;
         try {
             const singleProduct = await productService.getProductById(pid);
             console.log("el detalle de pid es",singleProduct)
             //res.status(200).send(singleProduct);
-            res.status(200).render('singleProduct', { product: singleProduct }); 
+            res.status(200).render('singleProduct', {user: currentUser , product: singleProduct }); 
         } catch (error) {
             res.status(500).send(`se sufre este ${error}`)
         }
