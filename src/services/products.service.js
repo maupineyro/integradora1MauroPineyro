@@ -1,6 +1,6 @@
 //debe relacionar al controller con la persistencia, usando el model
 
-import productModel from "../dao/models/products.model.js";
+import productModel from "../dao/mongo/models/products.model.js";
 
 class ProductService {
 //    

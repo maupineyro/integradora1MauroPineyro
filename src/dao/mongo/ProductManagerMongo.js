@@ -1,5 +1,4 @@
-import productModel from "../../models/products.model.js"
-import mongoose from "mongoose";
+import productModel from "./models/products.model.js";
 
 class ProductManagerMongo {
     //CREATE (addProducts)

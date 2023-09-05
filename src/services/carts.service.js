@@ -1,6 +1,6 @@
 //debe relacionar al controller con la persistencia, usando el model
 
-import cartModel from "../dao/models/carts.model.js";
+import cartModel from "../dao/mongo/models/carts.model.js";
 
 class CartService {
 //

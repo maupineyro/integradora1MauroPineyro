@@ -1,6 +1,4 @@
-//importar e instanciar productManager
-import ProductManagerMongo from "../dao/managers/mongoDB/ProductManagerMongo.js";
-const productManager = new ProductManagerMongo;
+
 import { productService } from "../services/products.service.js";
 
 //estructurar el socket de productos

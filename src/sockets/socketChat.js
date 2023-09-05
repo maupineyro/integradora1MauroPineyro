@@ -1,5 +1,5 @@
 //el chat de servidor
-import messageModel from "../dao/models/messages.model.js";
+import messageModel from "../dao/mongo/models/messages.model.js";
 
 //estructurar el socket de chat
 

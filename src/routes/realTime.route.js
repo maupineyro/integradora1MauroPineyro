@@ -2,7 +2,7 @@
 
 import {Router} from 'express';
 import { isAdmin } from '../middlewares/auth.js';
-import ProductManagerMongo from '../dao/managers/mongoDB/ProductManagerMongo.js';
+import ProductManagerMongo from '../dao/mongo/ProductManagerMongo.js';
 
 const realTimeRouter = Router();
 const productManager = new ProductManagerMongo;

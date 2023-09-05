@@ -4,9 +4,13 @@
 * crear el enlace al carrito y conectarle la view
 * hacer el factory y el switch persistence
 * conectar el userDto al Current.
+* colocar los middlewares de user y admin para bloquear ciertos endpoints.
 * completar el users controller y service
-* Hacer el ticket model
+* sacar el hardcode de imgs y poner los links en la db
+* revisar el ticket model
 * Crear toda la lógica del ticket
+* actualizar el filesystem
+* hacer la entrega de errores.
 * Revisar el update de carrito y update de cantidad de producto del carrito
 * agregar la validación de código repetido al agregar un producto desde formulario
 * revisar los links de prev/next y el sort (conectar el sort al price)

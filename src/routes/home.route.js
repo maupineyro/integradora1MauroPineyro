@@ -1,7 +1,7 @@
 // esta ruta debe mostrar todos los productos al momento en http://localhost:8080/home
 
 import {Router} from 'express';
-import ProductManagerMongo from '../dao/managers/mongoDB/ProductManagerMongo.js';
+import ProductManagerMongo from '../dao/mongo/ProductManagerMongo.js';
 
 const homeRouter = Router();
 const productManager = new ProductManagerMongo;
