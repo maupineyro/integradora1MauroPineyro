@@ -1,11 +1,11 @@
 -Pendientes generales
 
+* completar el dao según clase 29.
 * completar el config y el .env
-* crear el enlace al carrito y conectarle la view
 * hacer el factory y el switch persistence
-* conectar el userDto al Current.
-* colocar los middlewares de user y admin para bloquear ciertos endpoints.
+* conectar el "añadir al carrito" y negar permiso al admin
 * completar el users controller y service
+* crear el controlador y servicio del chat.
 * sacar el hardcode de imgs y poner los links en la db
 * revisar el ticket model
 * Crear toda la lógica del ticket
@@ -14,8 +14,6 @@
 * Revisar el update de carrito y update de cantidad de producto del carrito
 * agregar la validación de código repetido al agregar un producto desde formulario
 * revisar los links de prev/next y el sort (conectar el sort al price)
-* crear el controlador y servicio del chat.
-* eliminar console.logs y comentarios no explicativos
-* solucionar el problema de falta de css en páginas secundarias tipo /api/sessions/login
+
 
 

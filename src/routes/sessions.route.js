@@ -1,6 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import { accountLogged } from "../middlewares/auth.js";
+import UserDto from "../dao/dto/user.dto.js";
 
 const sessionRouter = Router();
 
@@ -55,7 +56,8 @@ sessionRouter.get('/githubcallback',passport.authenticate('github',{failureRedir
 
 sessionRouter.get('/current', async (req,res)=>{
     if(req.session.user){
-        return res.send((req.session.user));
+        let sessionDto = new UserDto(req.session.user)
+        return res.send((sessionDto));
     }
     return res.send({msg:"No hay sesión activa", payload:(req.session)})
     

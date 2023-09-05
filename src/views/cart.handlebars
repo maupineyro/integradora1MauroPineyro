@@ -1,6 +1,11 @@
 {{#if cart}}
     <div class="card">
     <p>soy el cart {{cart._id}}</p>
+    <ul>
+        {{#each cart.products}}
+        <li>acá los productos</li>
+        {{/each}}
+    </ul>
     <button class="card-button bg-success">Comprar</button>
     </div>
    
