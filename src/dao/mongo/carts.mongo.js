@@ -1,6 +1,10 @@
 import cartModel from "./models/carts.model.js";
 
-class CartManagerMongo{
+class Carts{
+    constructor(){
+    //
+    }
+//  
 
 //create
     addCart = async (cart)=>{
@@ -115,4 +119,4 @@ class CartManagerMongo{
 
 }//finaliza la class CartManagerMongo
 
-export default CartManagerMongo
+export default Carts
