@@ -25,7 +25,7 @@ class CartService {
 //
     getCartById = async (id) =>{
         try {
-            const CartByID = await cartModel.findById(id).populate('products.product').exec();
+            const CartByID = await cartModel.findById(id).populate('products.product').lean();
             return CartByID;
         } catch (error) {
             console.log (error);

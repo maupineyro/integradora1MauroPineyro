@@ -28,7 +28,8 @@ class CartController {
             let cid = req.params.cid;
             const singleCart = await cartService.getCartById(cid);
             if (!singleCart) return "carrito no encontrado";
-            res.status(200).send(singleCart);
+            //res.status(200).send(singleCart);
+            res.status(200).render('cart',{cart: singleCart});
         } catch (error) {
             res.status(500).send(`se sufre este ${error}`)   
         }

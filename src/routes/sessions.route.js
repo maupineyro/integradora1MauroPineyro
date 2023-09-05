@@ -63,8 +63,8 @@ sessionRouter.get('/current', async (req,res)=>{
 
 
 //logout get
-sessionRouter.get('/logout', async (req,res)=>{
-    req.session.destroy(err =>{
+sessionRouter.get('/logout', (req,res)=>{
+     req.session.destroy(err =>{
     if (err) return res.send({status: 'error', message: err})   
     })
     res.redirect('/login')

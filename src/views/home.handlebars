@@ -1,10 +1,12 @@
+{{#if user}}
 <div >
     <ul class="d-flex flex-row-reverse">
         <li><a class="mx-3" href="http://localhost:8080/api/sessions/logout">Cerrar Sesión</a></li>
         <li><a class="mx-3" href="http://localhost:8080/realtimeproducts">Realtime (para admin)</a> </li>
         <li><a class="mx-3" href="http://localhost:8080/profile">Perfil</a></li>
+        <li><a class="mx-3" href="http://localhost:8080/api/carts/{{user.cart}}">Carrito</a></li>
     </ul>
-    
+{{/if}}    
     
 </div>
 <div class="titleContainer">

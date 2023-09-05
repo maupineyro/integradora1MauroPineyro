@@ -4,6 +4,7 @@
         <li><a class="mx-3" href="http://localhost:8080/api/sessions/logout">Cerrar Sesión</a> </li>
         <li><a class="mx-3" href="http://localhost:8080/realtimeproducts">Realtime (para admin)</a> </li>
         <li><a class="mx-3" href="http://localhost:8080/home">Home</a> </li>
+        <li><a class="mx-3" href="http://localhost:8080/api/carts/{{user.cart}}">Carrito</a> </li>
     </ul>
 </div>
 <div class="text-center">
@@ -11,5 +12,6 @@
     <br>
     <p>Email: {{user.email}}</p>
     <p>Role: {{user.role}}</p>
+    <p>cid: {{user.cart}}</p>
 </div>
 {{/if}}

@@ -26,4 +26,6 @@ viewRouter.get('/profile',accountLogged, async (req,res)  =>{
 
 
 
+
+
 export default viewRouter;

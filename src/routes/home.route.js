@@ -3,16 +3,18 @@
 import {Router} from 'express';
 import ProductManagerMongo from '../dao/mongo/ProductManagerMongo.js';
 
+
 const homeRouter = Router();
 const productManager = new ProductManagerMongo;
 
 //get
 homeRouter.get ('/', async (req, res) =>{
     const {page, limit} = req.query;
+    
 try {
     const dataProducts = await productManager.getProducts(page, limit); //este trae la data docs y tmb la data de paginate
     //console.log(dataProducts)
-    
+      let currentUser = req.session.user || null;
      let  products = dataProducts.docs.map((item) => {
     return { title: item.title, _id: item._id, price: item.price, description: item.description};
   });
@@ -30,6 +32,7 @@ try {
   //render
     res.render ('home', { 
         documentTitle: "Ecommerce - Home",
+         user: currentUser,
          products: products, 
          pagination: rest, links
     })
