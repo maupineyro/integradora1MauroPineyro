@@ -27,6 +27,7 @@ import cartRouter from "./routes/carts.route.js";
 import chatRouter from "./routes/chat.route.js";
 import sessionRouter from "./routes/sessions.route.js";
 import viewRouter from "./routes/views.router.js";
+import mockRouter from "./routes/mocks.route.js";
 
 //App Settings
 dotenv.config();
@@ -62,6 +63,7 @@ app.use ("/api/products", productRouter); //debe manejar el crud de productos co
 app.use ("/api/carts", cartRouter); //debe manejar el crud de carrito
 app.use ("/api/sessions",sessionRouter) // debe manejar el post de login, register, logout de sesiones
 app.use ('/', viewRouter) //debe manejar la parte visible de login y register
+app.use ('/mockingproducts', mockRouter)
 
 //Socket IO
 const server = http.createServer(app);
