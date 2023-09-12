@@ -3,7 +3,8 @@ import { productController } from "../controllers/products.controller.js";
 
 const mockRouter = Router();
 
-mockRouter.get('/', productController.getMockingProducts())
+mockRouter.get('/', (req, res) => {
+  productController.getMockingProducts(req, res);})
 
 
 export default mockRouter;
