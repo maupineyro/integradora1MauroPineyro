@@ -1,6 +1,7 @@
 //debe tomar los req y devolver los res, usando el productService.
 
 import { productService } from "../services/products.service.js";
+import { generateMockingProducts } from "../utils/utils.mocks.js";
 
 class ProductController {
 //    
@@ -74,7 +75,13 @@ class ProductController {
 //    
      async getMockingProducts (req,res){
         try {
-            res.send({status: success, payload:'mocks On'})
+            let mockProducts = [];
+            let mockProductsQuantity = 100;
+            for(let index = 0; index < mockProductsQuantity; index++){
+                mockProducts.push(generateMockingProducts())
+            }
+
+            res.send({status: success, payload:mockProducts})
         } catch (error) {
              res.status(500).send({error: error, payload:'mocks Fail'})
         }
