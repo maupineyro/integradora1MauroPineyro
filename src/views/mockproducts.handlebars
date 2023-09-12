@@ -1,0 +1,17 @@
+{{#if payload}}
+<div class="gridContainer">
+    {{#each payload}}
+    <div class="card">
+        <img src={{this.thumbnails}}  alt="Imagen"
+            class="card-image">
+
+        <h2 class="card-title">{{this.title}}</h2>
+
+
+        <p class="card-id">ID: {{this._id}}</p>
+
+        <p class="card-price"> precio: $ {{this.price}}</p>
+    
+    </div>
+    {{/each}}
+{{/if}}

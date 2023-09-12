@@ -7,7 +7,7 @@ export const generateMockingProducts = () =>{
         _id: faker.database.mongodbObjectId(),
         title: faker.commerce.productName(),
         description: faker.commerce.productDescription(),
-        thumbnails: [faker.image.url(), faker.image.url(), faker.image.url()],
+        thumbnails: faker.image.url(),
         category: faker.commerce.department(),
         price: faker.commerce.price(),
         stock: faker.string.numeric(),
