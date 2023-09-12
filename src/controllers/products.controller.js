@@ -71,6 +71,19 @@ class ProductController {
         res.status(500).send(`se sufre este ${error}`)
         }
     }
+//    
+     async getMockingProducts (req,res){
+        try {
+            res.send({status: success, payload:'mocks On'})
+        } catch (error) {
+             res.status(500).send({error: error, payload:'mocks Fail'})
+        }
+    }
+
 }
+
+
 //
+
+   
 export const productController = new ProductController;
