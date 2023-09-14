@@ -18,6 +18,7 @@ import __dirNamePublic from "./public/publicDirName.js";
 import socketProducts from "./sockets/socketProducts.js";
 import socketChat from "./sockets/socketChat.js";
 import { InitPassport } from "./config/passport.config.js";
+import { addLogger } from "./config/logger-base.js";
 
 //Import Routes
 import homeRouter from "./routes/home.route.js";
@@ -40,6 +41,9 @@ app.use(morgan('dev')) //para chequear peticiones get post etc por consola
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+//Logger base
+app.use(addLogger);
+
 //session
 app.use(session ({
     store: MongoStore.create({
@@ -54,6 +58,9 @@ app.use(session ({
 InitPassport();
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+
 
 //App Routes
 app.use ('/home', homeRouter); //debe mostrar todos los productos agregados hasta el momento
