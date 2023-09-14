@@ -1,7 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import { accountLogged } from "../middlewares/auth.js";
-import UserDto from "../dao/dto/user.dto.js";
+import UserDto from "../dto/user.dto.js";
 
 const sessionRouter = Router();
 

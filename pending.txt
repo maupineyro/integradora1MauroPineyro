@@ -5,6 +5,8 @@
 * hacer el factory y el switch persistence
 * negar permiso al admin para agregar products a su cart
 * completar el users controller y service
+* ajustar en el user controller la const users para db, 
+* ajustar las estrategias passport para usar el user controller
 * crear el controlador y servicio del chat.
 * sacar el hardcode de imgs y poner los links en la db
 * Crear toda la lógica del ticket
