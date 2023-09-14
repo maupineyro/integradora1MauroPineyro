@@ -24,7 +24,11 @@ export const saveUsers = async (req, res)=>{
                 code: EErrors.INVALID_TYPES_ERROR
             })
         }
+        //completar los pasos para guardar el user en db, volver a ver clase 32 ( 1h32min) para adaptar la parte final.
+
     } catch (error) {
+         console.error(error);
+        res.status(500).send ({error: error.code , message: error.message})
         
     }
 }
