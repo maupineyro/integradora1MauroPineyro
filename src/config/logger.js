@@ -20,15 +20,56 @@ const customLevelsOptions = {
     }
 }
 
-//Logger
-const logger = winston.createLogger ({
+//Loggers
+//devLogger
+const  devLogger = winston.createLogger ({
+    levels: customLevelsOptions.levels,
     transports: [
         //console
-        new winston.transports.Console({level: 'debug'}),
+        new winston.transports.Console(
+            {
+                level: 'debug',
+                format: winston.format.combine(
+                    winston.format.colorize({colors: customLevelsOptions.colors}),
+                    winston.format.simple()
+                )
+            }),
         //files
-        new winston.transports.File({filename:'./errors.log', level:'error'})
-],
+        new winston.transports.File(
+            {
+                filename:'./errors.log', 
+                level:'error',
+                format: winston.format.simple()
+            }
+        )
+    ],
 })
+
+//prodLogger
+
+const  prodLogger = winston.createLogger ({
+    levels: customLevelsOptions.levels,
+    transports: [
+        //console
+        new winston.transports.Console(
+            {
+                level: 'info',
+                format: winston.format.combine(
+                    winston.format.colorize({colors: customLevelsOptions.colors}),
+                    winston.format.simple()
+                )
+            }),
+        //files
+        new winston.transports.File(
+            {
+                filename:'./errors.log', 
+                level:'error',
+                format: winston.format.simple()
+            }
+        )
+    ],
+})
+
 
 //middleware addLogger
 export const addLogger = (req, res, next)=>{
