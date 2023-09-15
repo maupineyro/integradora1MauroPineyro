@@ -1,4 +1,5 @@
 import winston from "winston";
+import config from "./config.js";
 
 const customLevelsOptions = {
     levels:{
@@ -73,7 +74,14 @@ const  prodLogger = winston.createLogger ({
 
 //middleware addLogger
 export const addLogger = (req, res, next)=>{
-    req.logger = logger;
-    req.logger.http ('logger test');
+    if(config.environment === "production"){
+        req.logger = prodLogger;
+        req.logger.warning("test de level warning en production");
+        req.logger.http(`${req.method} en ${req.url} - winston log en production`)   
+    } else {
+        req.logger = devLogger;
+        req.logger.warning("test de level warning en development");
+        req.logger.http(`${req.method} en ${req.url} - winston log en development`)  
+    }   
     next();
 }
