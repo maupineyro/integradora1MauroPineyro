@@ -18,7 +18,7 @@ import __dirNamePublic from "./public/publicDirName.js";
 import socketProducts from "./sockets/socketProducts.js";
 import socketChat from "./sockets/socketChat.js";
 import { InitPassport } from "./config/passport.config.js";
-import { addLogger } from "./config/logger-base.js";
+import { addLogger } from "./config/logger.js";
 
 //Import Routes
 import homeRouter from "./routes/home.route.js";
@@ -29,6 +29,7 @@ import chatRouter from "./routes/chat.route.js";
 import sessionRouter from "./routes/sessions.route.js";
 import viewRouter from "./routes/views.router.js";
 import mockRouter from "./routes/mocks.route.js";
+import loggerRouter from "./routes/logger.route.js";
 
 //App Settings
 dotenv.config();
@@ -41,8 +42,8 @@ app.use(morgan('dev')) //para chequear peticiones get post etc por consola
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-//Logger base
-app.use(addLogger);
+
+
 
 //session
 app.use(session ({
@@ -59,8 +60,8 @@ InitPassport();
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
+//logger como middleware
+app.use(addLogger);
 
 //App Routes
 app.use ('/home', homeRouter); //debe mostrar todos los productos agregados hasta el momento
@@ -71,6 +72,7 @@ app.use ("/api/carts", cartRouter); //debe manejar el crud de carrito
 app.use ("/api/sessions",sessionRouter) // debe manejar el post de login, register, logout de sesiones
 app.use ('/', viewRouter) //debe manejar la parte visible de login y register
 app.use ('/mockingproducts', mockRouter)
+app.use('/loggerTest', loggerRouter )
 
 //Socket IO
 const server = http.createServer(app);
