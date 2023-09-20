@@ -19,6 +19,8 @@ import socketProducts from "./sockets/socketProducts.js";
 import socketChat from "./sockets/socketChat.js";
 import { InitPassport } from "./config/passport.config.js";
 import { addLogger } from "./config/logger.js";
+import config from "./config/config.js";
+import MongoSingleton from "./config/db.singleton.js";
 
 //Import Routes
 import homeRouter from "./routes/home.route.js";
@@ -81,9 +83,19 @@ socketProducts(io);
 socketChat (io);
  
 //listen y DB
-const PORT = 8080 || process.env.PORT;
-server.listen(PORT, ()=>{
-    console.log(`Server is running on ${PORT}`);  
-    connectToDatabase();
+
+
+const SERVER_PORT = config.port;
+server.listen(SERVER_PORT, ()=>{
+    console.log(`Servidor escuchando por el puerto: ${SERVER_PORT}`);  
+    const mongoInstance = async () => {
+    try {
+        await MongoSingleton.getInstance();
+    } catch (error) {
+        console.error(error);
+        process.exit();
+    }
+};
+    mongoInstance();
 })
 
