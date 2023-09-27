@@ -33,6 +33,11 @@ const ProductSchema = new mongoose.Schema({ //acá tengo que poner el esquema de
     },
     thumbnail:{
         type: String,
+    },
+    owner:{
+        type:  mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+        default: 'admin',
     }
 }) 
 

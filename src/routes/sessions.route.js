@@ -64,6 +64,11 @@ sessionRouter.get('/current', async (req,res)=>{
 })
 
 
+sessionRouter.get('/recoverpassword', async (req,res)=>{
+     res.render('recoverpassword', {})
+})
+
+
 //logout get
 sessionRouter.get('/logout', (req,res)=>{
      req.session.destroy(err =>{

@@ -50,7 +50,7 @@ app.use(express.urlencoded({extended:true}));
 //session
 app.use(session ({
     store: MongoStore.create({
-        mongoUrl:'mongodb+srv://mauPineyro:mongoClusterMP1Nomehable1@clustermp1.yuubkwb.mongodb.net/CoderBackendEcommerceDB'
+        mongoUrl:config.mongoUrl,
     }),
     secret: 'secretCoder',
     resave: true,
