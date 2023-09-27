@@ -32,6 +32,7 @@ import sessionRouter from "./routes/sessions.route.js";
 import viewRouter from "./routes/views.router.js";
 import mockRouter from "./routes/mocks.route.js";
 import loggerRouter from "./routes/logger.route.js";
+import emailRouter from "./routes/emails.route.js";
 
 //App Settings
 dotenv.config();
@@ -75,6 +76,7 @@ app.use ("/api/sessions",sessionRouter) // debe manejar el post de login, regist
 app.use ('/', viewRouter) //debe manejar la parte visible de login y register
 app.use ('/mockingproducts', mockRouter)
 app.use('/loggerTest', loggerRouter )
+app.use('/api/mailing', emailRouter)
 
 //Socket IO
 const server = http.createServer(app);
