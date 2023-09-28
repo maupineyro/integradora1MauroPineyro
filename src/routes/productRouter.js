@@ -2,7 +2,8 @@
 
 import { Router } from "express";
 import { productController } from "../controllers/products.controller.js";
-import { handleRoleAccess } from "../middlewares/handleRoleAccess.js";
+import { handleDeleteProductPolicies } from "../middlewares/handleRoleAccess.js";
+
 const productRouter = Router();
 
 
@@ -14,7 +15,7 @@ productRouter.get('/:pid', productController.getProduct) //get by ID
 
 productRouter.post ('/', productController.add ) //post
 
-productRouter.delete ('/:pid', productController.delete ) //delete ny ID
+productRouter.delete ('/:pid',handleDeleteProductPolicies, productController.delete ) //delete ny ID
 
 productRouter.put ('/:pid', productController.update ) //update
 

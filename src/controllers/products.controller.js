@@ -101,9 +101,15 @@ class ProductController {
              res.status(500).send({error: error, payload:'mocks Fail'})
         }
     }
-
+//
+    async getRealTimeProducts (req,res){
+        try {
+            let result= await productService.getRealtimeProducts()
+        } catch (error) {
+           res.status(500).send(`se sufre este ${error}`) 
+        }
+    }
 }
-
 
 //
 
