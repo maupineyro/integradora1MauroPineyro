@@ -104,7 +104,8 @@ class ProductController {
 //
     async getRealTimeProducts (req,res){
         try {
-            let result= await productService.getRealtimeProducts()
+            let result= await productService.getRealtimeProducts();
+            return result
         } catch (error) {
            res.status(500).send(`se sufre este ${error}`) 
         }

@@ -14,3 +14,7 @@ export async function handleDeleteProductPolicies (req, res, next) {
    
 //cambiar usando CurrentUser, revisar en general si se puede mejorar
 }
+
+export async function CartPolicies (req,res,next){
+  
+}
