@@ -2,6 +2,7 @@ import { Router } from "express";
 import passport from "passport";
 import { accountLogged } from "../middlewares/auth.js";
 import UserDto from "../dto/user.dto.js";
+import { sendEmail } from "../controllers/emails.controller.js";
 
 const sessionRouter = Router();
 
@@ -67,6 +68,8 @@ sessionRouter.get('/current', async (req,res)=>{
 sessionRouter.get('/recoverpassword', async (req,res)=>{
      res.render('recoverpassword', {})
 })
+
+sessionRouter.post('/mailing', sendEmail)
 
 
 //logout get

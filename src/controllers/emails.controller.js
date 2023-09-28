@@ -23,13 +23,24 @@ transporter.verify(function(error, success){
 })
 
 const mailOptions = {
-
+  from: 'coder app ecommerce' + config.gmailAccount,
+  to: config.gmailAccount,
+  subject: 'correo de prueba',
+  html: "<div><h1>próximamente cambio de pass</h1></div>",
+  attachments: []
 }
 
 export const sendEmail = (req, res) => {
     try {
-        
+        let result = transporter.sendMail(mailOptions,(error, info)=>{
+          if(error){
+            console.log(error)
+            res.status(400).send({message:"error", payload:error})
+          }
+        res.send({message:"Success", payload: info})  
+        })
     } catch (error) {
-        
+      console.log(error);
+      res.status(500).send({error: error, message:"no se pudo enviar el email desde"+ config.gmailAccount })  
     }
 }
