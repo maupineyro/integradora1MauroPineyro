@@ -35,7 +35,7 @@ const ProductSchema = new mongoose.Schema({ //acá tengo que poner el esquema de
         type: String,
     },
     owner:{
-        type:  mongoose.Schema.Types.ObjectId,
+        type:  String,
         ref: 'user',
         default: 'admin',
     }

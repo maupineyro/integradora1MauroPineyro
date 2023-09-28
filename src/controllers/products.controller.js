@@ -5,10 +5,11 @@ import { generateMockingProducts } from "../utils/utils.mocks.js";
 
 class ProductController {
 //    
-    async add (req, res) {
+    async add(req, res) {
         try {
-        let newPr = await productService.addProducts(req.body);
-        res.status(201).send({newPr}) 
+        let {dataProductForAdd} = req.body
+        let newPr = await productService.addProducts(dataProductForAdd);
+        res.status(201).send(newPr); 
         } catch (error) {
         res.status(500).send(`se sufre este ${error}`)
         }

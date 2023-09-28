@@ -13,8 +13,8 @@ const socketProducts = async(io) =>{
   
         socket.on('newProduct', async (newProduct)=>{ 
             
-            //await productService.addProducts(newProduct)
-            await productController.add(newProduct);
+            await productService.addProducts(newProduct)
+           
             //const products = await productService.getRealtimeProducts();
             const products = await productController.getRealTimeProducts();
             socket.emit('updatedProducts', products);
