@@ -38,7 +38,7 @@ class ProductController {
     }
 }   
 //
-    async getProduct (req, res){
+    async getProduct (req, res){//y currentUser, cambiar nombre e importaciones
         let pid = req.params.pid;
         let currentUser = req.session.user;
         try {
@@ -50,6 +50,20 @@ class ProductController {
             res.status(500).send(`se sufre este ${error}`)
         }
     }
+//
+    async findProductById (req, res){
+        let pid = req.params.pid;
+        try {
+            const singleProduct = await productService.getProductById(pid);
+            console.log("el detalle de pid es",singleProduct)
+            res.status(200).send(singleProduct);   
+        } catch (error) {
+            res.status(500).send(`se sufre este ${error}`)
+        }
+    }
+
+
+
 //
     async delete(req, res){
         let pid = req.params.pid;

@@ -1,12 +1,16 @@
-export async function handlePremiumPolicies (req, res, next) {
+import { productController } from "../controllers/products.controller.js"
+
+export async function handleDeleteProductPolicies (req, res, next) {
   
-  let productFound // completar con el service y encontrar por id
-  if (req.session.user.role == "premium" && productFound.owner) 
+  let productFound = await productController.findProductById(pid);
+  if(req.session.user.role == "admin"){
+    next ();
+  }
+  if (req.session.user.role == "premium" && (req.session.user._id == productFound.owner)) {
+     next()
+  } else {
+    return 'no tienes permisos para borrar este producto'
+  }
    
-
-
- 
-
-  //revisar sintaxis
-    next()
+//cambiar usando CurrentUser, revisar en general si se puede mejorar
 }
