@@ -7,9 +7,9 @@ export function accountLogged(req,res,next){
     });
 }
 
-export async function isAdmin(req,res,next){
+export async function isAdminOrPremium(req,res,next){
     await req.session.user;
-    if (req.session?.user?.role == "admin"){
+    if (req.session?.user?.role == "admin" || req.session?.user?.role == "premium"){
         console.log("el user role es ", req.session.user.role)
         return next();
     }
