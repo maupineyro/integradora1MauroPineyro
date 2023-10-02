@@ -1,6 +1,7 @@
 //debe tomar los req y devolver los res, usando el productService.
 
-import { productService } from "../services/products.service.js";
+//import { productService } from "../services/products.service.js";
+import { productsService } from "../services/factory.js";
 import { generateMockingProducts } from "../utils/utils.mocks.js";
 
 class ProductController {
@@ -8,7 +9,7 @@ class ProductController {
     async add(req, res) {
         try {
         let {dataProductForAdd} = req.body
-        let newPr = await productService.addProducts(dataProductForAdd);
+        let newPr = await productsService.addProducts(dataProductForAdd);
         res.status(201).send(newPr); 
         } catch (error) {
         res.status(500).send(`se sufre este ${error}`)
@@ -20,7 +21,7 @@ class ProductController {
         const limit= parseInt(req.query.limit) || 10;
         const page = parseInt(req.query.page)  || 1;
         const sort = parseInt(req.query.sort)  || 1;
-        const paginatedProducts = await productService.getProducts(page, limit);
+        const paginatedProducts = await productsService.getProducts(page, limit);
     return res.status(200).json({
         status: 'success',
         payload: paginatedProducts.docs,
@@ -43,7 +44,7 @@ class ProductController {
         let pid = req.params.pid;
         let currentUser = req.session.user;
         try {
-            const singleProduct = await productService.getProductById(pid);
+            const singleProduct = await productsService.getProductById(pid);
             console.log("el detalle de pid es",singleProduct)
             //res.status(200).send(singleProduct);
             res.status(200).render('singleProduct', {user: currentUser , product: singleProduct }); 
@@ -55,7 +56,7 @@ class ProductController {
     async findProductById (req, res){
         let pid = req.params.pid;
         try {
-            const singleProduct = await productService.getProductById(pid);
+            const singleProduct = await productsService.getProductById(pid);
             console.log("el detalle de pid es",singleProduct)
             res.status(200).send(singleProduct);   
         } catch (error) {
@@ -69,7 +70,7 @@ class ProductController {
     async delete(req, res){
         let pid = req.params.pid;
         try {
-            let deleted = await productService.deleteProductById(pid)
+            let deleted = await productsService.deleteProductById(pid)
             res.status(201).send(`el producto fue eliminado`) 
         } catch (error) {
             res.status(500).send(`se sufre este ${error}`)
@@ -81,7 +82,7 @@ class ProductController {
         let newProps = req.body;
         if (!newProps) return;
         try {
-            let updated = await productService.updateProductByID(pid,newProps)
+            let updated = await productsService.updateProductByID(pid,newProps)
             res.status(201).send(`el producto fue actualizado`)     
         } catch (error) {
         res.status(500).send(`se sufre este ${error}`)
@@ -105,7 +106,7 @@ class ProductController {
 //
     async getRealTimeProducts (req,res){
         try {
-            let result= await productService.getRealtimeProducts();
+            let result= await productsService.getRealtimeProducts();
             return result
         } catch (error) {
            res.status(500).send(`se sufre este ${error}`) 

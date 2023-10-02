@@ -1,7 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import { accountLogged } from "../middlewares/auth.js";
-import UserDto from "../dto/user.dto.js";
+import UserDto from "../services/dto/user.dto.js";
 import { sendEmail } from "../controllers/emails.controller.js";
 import { changeMembership } from "../controllers/users.controller.js";
 
