@@ -1,18 +1,23 @@
+
 import CustomError from "../services/errors/customError.js";
 import EErrors from "../services/errors/errorsEnum.js";
 import { generateUserErrorInfo } from "../services/errors/errorMessages.js";
+import UserService from "../services/users.service.js";
 
-export const getUsers = async (req, res)=>{
-    const users = []; // cambiar luego x dbUsers
+const userService = new UserService()
+
+export const getAllUsers = async (req, res)=>{
+    
     try {
-        res.send({message: "success", payload:users})
+        let users = await userService.getUsers();
+        res.send({message: "success", payload:users});
     } catch (error) {
         console.error(error);
         res.status(500).send ({error:error ,message:"no se pudo obtener los usuarios"})
     }
 }
 
-export const saveUsers = async (req, res)=>{
+export const saveUser = async (req, res)=>{
     try {
         console.log (req.body)
         const {first_name, last_name, email, age} = req.body //revisar para adaptar a lo hecho en passport register
@@ -31,4 +36,8 @@ export const saveUsers = async (req, res)=>{
         res.status(500).send ({error: error.code , message: error.message})
         
     }
+}
+
+export const changeMembership = async (req, res) =>{
+ const userId = req.params.uid
 }
