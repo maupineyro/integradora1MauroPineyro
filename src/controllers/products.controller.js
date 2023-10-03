@@ -21,19 +21,16 @@ class ProductController {
                 sort = ''
             } 
         const paginatedProducts = await productsService.getProducts(page, limit, sort, query);
-    return res.status(200).json({
-        status: 'success',
-        payload: paginatedProducts.docs,
-        totalPages: paginatedProducts.totalPages,
-        prevPages: paginatedProducts.prevPage,
-        nextPages: paginatedProducts.nextPage,
-        page: paginatedProducts.page,
-        hasPrevPage: paginatedProducts.hasPrevPage,
-        hasNextPage: paginatedProducts.hasNextPage,
-        prevLink: paginatedProducts.hasPrevPage? `http://localhost:8080/api/products/?page=${paginatedProducts.prevPage}`: null,
-
-        nextLink: paginatedProducts.hasNextPage? `http://localhost:8080/api/products/?page=${paginatedProducts.nextPage}` : null,
-    })
+          const { docs, ...rest } = paginatedProducts;
+           let user = req.session.user || null;
+          let products = docs.map((doc) => {
+              return { _id: doc._id, title: doc.title, thumbnail: doc.thumbnail, price: doc.price, stock: doc.stock ,description: doc.description};
+            });
+        res.status(200).render('home',{products, pagination:rest , user})
+        {
+            
+        }
+    
     } catch (error) {
         throw error
     }
