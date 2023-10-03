@@ -7,12 +7,18 @@ export default class ProductServiceMongo {
         return newProduct
     };
 //
-    getProducts = async (page,limit) =>{
+    getProducts = async (page, limit, sort) =>{
         try {
-            const paginatedProducts = await productModel.paginate({},{limit: limit || 10, page: page || 1});
+            
+            const options = {
+                page: page || 1,
+                limit: limit || 10,
+                sort: sort ? { [sort]: 1 } : null, // Ordenar si se proporciona un campo de ordenamiento
+            };
+            const paginatedProducts = await productModel.paginate({},options);
             return paginatedProducts;
         } catch (error) {
-            console.log(error)
+            throw error
         };
     };
 //

@@ -1,7 +1,6 @@
 import config from "../config/config.js";
 import MongoSingleton from "../config/db.singleton.js";
 
-
 let productsService;
 let cartsService;
 let usersService;
@@ -18,9 +17,9 @@ async function initializeMongoService() {
         cartsService = new CartServiceMongo();
         usersService = new UserServiceMongo();
 
-        console.log(`Servicio de products cargado,`);
-        console.log(`Servicio de carts cargado,`);
-        console.log(`Servicio de users cargado,`);
+        console.log(`Servicio de products cargado (mongoDB)`);
+        console.log(`Servicio de carts cargado (mongoDB)`);
+        console.log(`Servicio de users cargado (mongoDB)`);
         
 
     } catch (error) {
@@ -43,9 +42,9 @@ switch(config.persistence) {
         cartsService = new CartServiceFileSystem();
         usersService = new UserServiceFileSystem();
 
-        console.log(`Servicio de products cargado,`);
-        console.log(`Servicio de carts cargado,`);
-        console.log(`Servicio de users cargado,`);
+        console.log(`Servicio de products cargado (filesystem)`);
+        console.log(`Servicio de carts cargado (filesystem)`);
+        console.log(`Servicio de users cargado (filesystem)`);
         break
     default:  
         console.error("Persistencia no válida en la configuración:", config.persistence);

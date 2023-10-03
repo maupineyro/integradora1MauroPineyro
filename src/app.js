@@ -12,7 +12,6 @@ import dotenv from 'dotenv';
 
 
 //Import Modules
-import { connectToDatabase } from "./dao/db.js";
 import __dirNameViews from "./views/solutionDirName.js";
 import __dirNamePublic from "./public/publicDirName.js";
 import socketProducts from "./sockets/socketProducts.js";
@@ -42,8 +41,9 @@ app.set ("view engine", "handlebars");
 app.set ("views", __dirNameViews);
 app.use(express.static(__dirNamePublic));
 app.use(morgan('dev')) //para chequear peticiones get post etc por consola
+
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({extended: true}));
 
 
 

@@ -1,6 +1,4 @@
-//debe tomar los req y devolver los res, usando el productService.
 
-//import { productService } from "../services/products.service.js";
 import { productsService } from "../services/factory.js";
 import { generateMockingProducts } from "../utils/utils.mocks.js";
 
@@ -16,12 +14,13 @@ class ProductController {
         }
     }
 //
-    async getAll(req, res){
-    try {
-        const limit= parseInt(req.query.limit) || 10;
-        const page = parseInt(req.query.page)  || 1;
-        const sort = parseInt(req.query.sort)  || 1;
-        const paginatedProducts = await productsService.getProducts(page, limit);
+    async getAll (req,res){
+        try {
+        let {limit = 10, page = 1, query, sort} = req.query
+            if(sort && (sort !== 'asc' && sort !== 'desc')){
+                sort = ''
+            } 
+        const paginatedProducts = await productsService.getProducts(page, limit, sort, query);
     return res.status(200).json({
         status: 'success',
         payload: paginatedProducts.docs,
@@ -36,7 +35,7 @@ class ProductController {
         nextLink: paginatedProducts.hasNextPage? `http://localhost:8080/api/products/?page=${paginatedProducts.nextPage}` : null,
     })
     } catch (error) {
-        res.status(500).send(`se sufre este ${error}`)
+        throw error
     }
 }   
 //
