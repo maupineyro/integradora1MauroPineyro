@@ -1,18 +1,19 @@
 // esta ruta debe mostrar todos los productos al momento en http://localhost:8080/home
 
 import {Router} from 'express';
-import ProductManagerMongo from '../dao/mongo/ProductManagerMongo.js';
+
+import { productController } from '../controllers/products.controller.js';
 
 
 const homeRouter = Router();
-const productManager = new ProductManagerMongo;
+
 
 //get
 homeRouter.get ('/', async (req, res) =>{
     const {page, limit} = req.query;
     
 try {
-    const dataProducts = await productManager.getProducts(page, limit); //este trae la data docs y tmb la data de paginate
+    const dataProducts = await productController.getAll(page, limit); //este trae la data docs y tmb la data de paginate
     //console.log(dataProducts)
       let currentUser = req.session.user || null;
      let  products = dataProducts.docs.map((item) => {

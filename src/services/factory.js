@@ -7,7 +7,7 @@ let cartsService;
 let usersService;
 
 async function initializeMongoService() {
-    console.log("Iniciando service para MongoDB desde factory (singleton pattern)");
+    console.log("Iniciando service para MongoDB desde factory");
     try {
         await MongoSingleton.getInstance();
         const { default: ProductServiceMongo } = await import('./dao/db/products.service.js');
@@ -18,9 +18,9 @@ async function initializeMongoService() {
         cartsService = new CartServiceMongo();
         usersService = new UserServiceMongo();
 
-        console.log(`Servicio de products cargado: ${productsService}`);
-        console.log(`Servicio de carts cargado: ${cartsService}`);
-        console.log(`Servicio de users cargado: ${usersService}`);
+        console.log(`Servicio de products cargado,`);
+        console.log(`Servicio de carts cargado,`);
+        console.log(`Servicio de users cargado,`);
         
 
     } catch (error) {
@@ -43,9 +43,9 @@ switch(config.persistence) {
         cartsService = new CartServiceFileSystem();
         usersService = new UserServiceFileSystem();
 
-        console.log(`Servicio de products cargado: ${productsService}`);
-        console.log(`Servicio de carts cargado: ${cartsService}`);
-        console.log(`Servicio de users cargado: ${usersService}`);
+        console.log(`Servicio de products cargado,`);
+        console.log(`Servicio de carts cargado,`);
+        console.log(`Servicio de users cargado,`);
         break
     default:  
         console.error("Persistencia no válida en la configuración:", config.persistence);

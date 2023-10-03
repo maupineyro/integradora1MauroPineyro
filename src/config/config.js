@@ -6,10 +6,12 @@ const program = new Command();
 program 
     .option('-d','variable para debug', false)
     .option('-p <port>','puerto del servidor', 8080)
+    .option('--persist <mode>', 'Modo de persistencia', "mongodb")
     .option('--mode <mode>', 'modo de trabajo', 'develop')
 program.parse();
 
 console.log("Mode Option: ", program.opts().mode);
+console.log("Persistence Mode Option: ", program.opts().persist);
 
 const environment = program.opts().mode;
 
@@ -22,7 +24,7 @@ dotenv.config(
 export default {
     port: process.env.PORT,
     mongoUrl: process.env.MONGO_URL,
-    persistence:process.env.PERSISTENCE,
+    persistence: program.opts().persist,
     gmailAccount:process.env.GMAIL_ACCOUNT,
     gmailAppPassword:process.env.GMAIL_APP_PASSW,
     environment: environment

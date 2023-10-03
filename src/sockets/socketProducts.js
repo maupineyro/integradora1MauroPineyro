@@ -1,5 +1,5 @@
 
-import { productService } from "../services/products.service.js";
+import { productsService } from "../services/factory.js";
 import { productController } from "../controllers/products.controller.js";
 
 //estructurar el socket de productos
@@ -13,7 +13,7 @@ const socketProducts = async(io) =>{
   
         socket.on('newProduct', async (newProduct)=>{ 
             
-            await productService.addProducts(newProduct)
+            await productsService.addProducts(newProduct)
            
             //const products = await productService.getRealtimeProducts();
             const products = await productController.getRealTimeProducts();

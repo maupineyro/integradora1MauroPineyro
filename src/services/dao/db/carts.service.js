@@ -1,8 +1,8 @@
 //debe relacionar al controller con la persistencia, usando el model
 
-import cartModel from "../dao/mongo/models/carts.model.js";
+import cartModel from "../../../dao/mongo/models/carts.model.js";
 
-class CartService {
+export default class CartServiceMongo {
 //
     addCart = async (cart)=>{
         const newCart = new cartModel({products:[]}) // el cid lo genera mongo
@@ -109,4 +109,3 @@ class CartService {
     }
 }
 
-export const cartService = new CartService;

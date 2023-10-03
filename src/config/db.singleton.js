@@ -18,7 +18,14 @@ export default class MongoSingleton {
 
       #connectMongoDB = async ()=>{
         try {
-            await mongoose.connect(config.mongoUrl);
+            await mongoose.connect(
+                config.mongoUrl,
+                {
+                    useNewUrlParser: true,
+                    useUnifiedTopology: true,
+                    w: 1,
+                }    
+            );
             console.log("Conectado con exito a MongoDB usando Mongoose(Singleton pattern).");
         } catch (error) {
             console.error("No se pudo conectar a la BD usando Mongoose: " + error);

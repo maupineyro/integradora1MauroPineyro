@@ -20,7 +20,7 @@ import socketChat from "./sockets/socketChat.js";
 import { InitPassport } from "./config/passport.config.js";
 import { addLogger } from "./config/logger.js";
 import config from "./config/config.js";
-import MongoSingleton from "./config/db.singleton.js";
+
 
 //Import Routes
 import homeRouter from "./routes/home.route.js";
@@ -90,14 +90,6 @@ socketChat (io);
 const SERVER_PORT = config.port;
 server.listen(SERVER_PORT, ()=>{
     console.log(`Servidor escuchando por el puerto: ${SERVER_PORT}`);  
-    const mongoInstance = async () => {
-    try {
-        await MongoSingleton.getInstance();
-    } catch (error) {
-        console.error(error);
-        process.exit();
-    }
-};
-    mongoInstance();
+ 
 })
 

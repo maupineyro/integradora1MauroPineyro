@@ -1,24 +1,21 @@
 import productModel from "./models/products.model.js";
 
-class ProductManagerMongo {
-    //CREATE (addProducts)
+export default class ProductServiceMongo {
+//    
     addProducts = async (newPr) =>{
-        const newProductSaveMongo = new productModel(newPr).save();
-        return newProductSaveMongo
+        const newProduct = new productModel(newPr).save();
+        return newProduct
     };
-
-    //READ (getProductById, getRealtimeProducts y getProducts)
+//
     getProducts = async (page,limit) =>{
         try {
-            //const AllProducts = await productModel.find().lean().exec();
-            //return AllProducts;
             const paginatedProducts = await productModel.paginate({},{limit: limit || 10, page: page || 1});
             return paginatedProducts;
         } catch (error) {
             console.log(error)
         };
     };
-
+//
     getRealtimeProducts = async() => {
         try {
             const AllProducts = await productModel.find().lean().exec();
@@ -28,21 +25,17 @@ class ProductManagerMongo {
             console.log(error)
         }
     }
-
+//
     getProductById = async (id) =>{
         try {
-            const ProductById = await productModel.findById(id).exec();
+            const ProductById = await productModel.findById(id).lean();
             return ProductById;
         } catch (error) {
             console.log(error)
         }
     }
-
-    //agregar el getProductByCode para validar después si está repetido
-
-    //UPDATE (updateProductByID)
-    updateProductByID = async (id, newProps) =>{
-       
+//
+    updateProductByID = async (id, newProps) =>{     
         try {
             const FindProductById = await productModel.findById(id);
             if (!FindProductById) return "id de producto no encontrado";
@@ -52,8 +45,7 @@ class ProductManagerMongo {
             console.log(error)
         }
     }
-
-    //DELETE (deleteProductById)
+//
     deleteProductById = async(id) =>{
         try {
             const FindProductById = await productModel.findById(id);
@@ -64,7 +56,5 @@ class ProductManagerMongo {
             console.log(error)
         }
     }
-
-}
-
-export default ProductManagerMongo
+};
+//

@@ -2,14 +2,15 @@
 import CustomError from "../services/errors/customError.js";
 import EErrors from "../services/errors/errorsEnum.js";
 import { generateUserErrorInfo } from "../services/errors/errorMessages.js";
-import UserService from "../services/users.service.js";
+//import UserService from "../services/users.service.js";
+import { usersService } from "../services/factory.js";
 
-const userService = new UserService()
+
 
 export const getAllUsers = async (req, res)=>{
     
     try {
-        let users = await userService.getUsers();
+        let users = await usersService.getUsers();
         res.send({message: "success", payload:users});
     } catch (error) {
         console.error(error);
