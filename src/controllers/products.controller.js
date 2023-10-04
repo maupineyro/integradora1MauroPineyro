@@ -22,15 +22,12 @@ class ProductController {
             } 
         const paginatedProducts = await productsService.getProducts(page, limit, sort, query);
           const { docs, ...rest } = paginatedProducts;
-           let user = req.session.user || null;
-          let products = docs.map((doc) => {
+            let user = req.session.user || null;
+            let products = docs.map((doc) => {
               return { _id: doc._id, title: doc.title, thumbnail: doc.thumbnail, price: doc.price, stock: doc.stock ,description: doc.description};
             });
         res.status(200).render('home',{products, pagination:rest , user})
-        {
-            
-        }
-    
+        
     } catch (error) {
         throw error
     }

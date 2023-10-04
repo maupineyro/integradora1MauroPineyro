@@ -1,4 +1,4 @@
-import userModel from "../../../dao/mongo/models/users.model.js";
+import userModel from "./models/users.model.js";
 
 
 class UserService {

@@ -2,9 +2,9 @@ import passport from "passport";
 import local from "passport-local";
 import UserManagerMongo from "../dao/mongo/UserManagerMongo.js";
 import { createHash, isValidPassword } from "./bcrypt.js";
-import GithubStrategy from "passport-github2"
-import userModel from "../dao/mongo/models/users.model.js";
-import cartModel from "../dao/mongo/models/carts.model.js";
+import GithubStrategy from "passport-github2";
+import userModel from "../services/dao/db/models/users.model.js";
+import cartModel from "../services/dao/db/models/carts.model.js";
 import dotenv from 'dotenv';
 import fetch from "node-fetch";
 
