@@ -3,6 +3,13 @@ import productModel from "./models/products.model.js";
 export default class ProductServiceMongo {
 //    
     addProducts = async (newPr) =>{
+        if (!newPr.code || !newPr.title || !newPr.description || !newPr.price || !newPr.thumbnail || !newPr.stock || !newPr.category) {
+                throw new Error('Campos vacíos, completar todos los campos');
+            }
+        let existingProduct = await productModel.findOne({ code: newPr.code });
+        if (existingProduct) {
+            throw new Error('El código del producto ya existe en la base de datos');
+        }   
         const newProduct = new productModel(newPr).save();
         return newProduct
     };

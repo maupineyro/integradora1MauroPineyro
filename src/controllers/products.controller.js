@@ -6,8 +6,8 @@ class ProductController {
 //    
     async add(req, res) {
         try {
-        let {dataProductForAdd} = req.body
-        let newPr = await productsService.addProducts(dataProductForAdd);
+        let {dataProduct} = req.body
+        let newPr = await productsService.addProducts(dataProduct);
         res.status(201).send(newPr); 
         } catch (error) {
         res.status(500).send(`se sufre este ${error}`)
