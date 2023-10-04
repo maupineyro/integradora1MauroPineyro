@@ -1,6 +1,5 @@
 -Pendientes generales
 
-* negar permiso al admin para agregar products a su cart
 * completar el users controller 
 * ajustar las estrategias passport para usar el user controller
 * crear el controlador y servicio del chat.
