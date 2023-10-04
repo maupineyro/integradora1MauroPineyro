@@ -2,6 +2,7 @@
 
 import { Router } from "express";
 import { cartController } from "../controllers/carts.controller.js";
+import { CartPolicies } from "../middlewares/handleRoleAccess.js";
 
 const cartRouter = Router();
 
@@ -13,7 +14,7 @@ cartRouter.get ('/', cartController.getAll) //get carts
 
 cartRouter.get ('/:cid',cartController.getCart) //get cart by Id
 
-cartRouter.post ('/:cid/products/:pid', cartController.productToCart) //post (product en carrito)
+cartRouter.post ('/:cid/products/:pid',CartPolicies, cartController.productToCart) //post (product en carrito)
 
 cartRouter.delete ('/:cid/products/:pid', cartController.deleteProduct) //delete un producto del carrito según su Id
 

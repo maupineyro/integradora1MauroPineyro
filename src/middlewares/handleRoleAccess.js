@@ -16,5 +16,9 @@ export async function handleDeleteProductPolicies (req, res, next) {
 }
 
 export async function CartPolicies (req,res,next){
-  
+  if (req.session.user.role != "admin"){
+  next();
+  } 
+  return res.status(403).render('error', {
+        error: 'error de autorización: STATUS 403!! no puedes agregar productos al carrito siendo Admin'})
 }

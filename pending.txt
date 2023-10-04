@@ -1,20 +1,16 @@
 -Pendientes generales
 
-* completar el dao según clase 29.
-* completar el config y el .env
-* hacer el factory y el switch persistence
 * negar permiso al admin para agregar products a su cart
-* completar el users controller y service
-* ajustar en el user controller la const users para db, 
+* completar el users controller 
 * ajustar las estrategias passport para usar el user controller
 * crear el controlador y servicio del chat.
 * sacar el hardcode de imgs y poner los links en la db
 * Crear toda la lógica del ticket
 * actualizar el filesystem
-* hacer la entrega de errores (faker, etc)
+* mejorar la entrega de errores (faker, etc)
 * Revisar el update de carrito y update de cantidad de producto del carrito
-* agregar la validación de código repetido al agregar un producto desde formulario
 * revisar los links de prev/next y el sort (conectar el sort al price)
+
 
 
 
