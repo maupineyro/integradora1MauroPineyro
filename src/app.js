@@ -9,6 +9,8 @@ import session from "express-session";
 import MongoStore from 'connect-mongo';
 import passport from "passport";
 import dotenv from 'dotenv';
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUIExpress from 'swagger-ui-express';
 
 
 //Import Modules
@@ -41,11 +43,24 @@ app.set ("view engine", "handlebars");
 app.set ("views", __dirNameViews);
 app.use(express.static(__dirNamePublic));
 app.use(morgan('dev')) //para chequear peticiones get post etc por consola
-
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 
+//Swagger config
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.1',
+        info: {
+            title: "Documentacion API Ecommerce Coder ",
+            description: "Documentación de la API Ecommerce para el curso de Backend de Coder",
+        }
+    },
+    apis:['./docs/**/*.yaml']
+}
+
+const specs = swaggerJSDoc(swaggerOptions)
+//
 
 
 //session
@@ -77,6 +92,7 @@ app.use ('/', viewRouter) //debe manejar la parte visible de login y register
 app.use ('/mockingproducts', mockRouter)
 app.use('/loggerTest', loggerRouter )
 app.use('/api/mailing', emailRouter)
+app.use('/apidocs', swaggerUIExpress.serve, swaggerUIExpress.setup(specs))
 
 //Socket IO
 const server = http.createServer(app);
