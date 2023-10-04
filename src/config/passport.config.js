@@ -1,6 +1,7 @@
 import passport from "passport";
 import local from "passport-local";
-import UserManagerMongo from "../dao/mongo/UserManagerMongo.js";
+//import UserManagerMongo from "../utils/paraBorrar/UserManagerMongo.js";
+import UserService from "../services/dao/db/users.service.js";
 import { createHash, isValidPassword } from "./bcrypt.js";
 import GithubStrategy from "passport-github2";
 import userModel from "../services/dao/db/models/users.model.js";
@@ -12,7 +13,8 @@ dotenv.config();
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 
-const userManager = new UserManagerMongo();
+//const userManager = new UserManagerMongo();
+const userService = new UserService();
 const localStrategy = local.Strategy
 //local
 export const InitPassport = () =>{
@@ -24,7 +26,7 @@ export const InitPassport = () =>{
         async(req, username, password, done)=>{
             try {
             let userData= req.body;
-            const user = await userManager.getUserByEmail(username);
+            const user = await userService.getUserByEmail(username);
             const newCart = new cartModel({products:[]})
             const role = (userData.email === 'adminCoder@coder.com' && userData.password === 'admin2023') ? 'admin' : 'user';
             if(user) return done(null,false) // si lo encuentra, no se puede volver a registrar
@@ -37,7 +39,7 @@ export const InitPassport = () =>{
                 cart: await newCart.save() ,
                 role: role
             }
-            let result = await userManager.addUser(newUser)
+            let result = await userService.addUsers(newUser)
             return done (null, result)
             } catch (error) {
             return done('error al crear el usuario' + error)

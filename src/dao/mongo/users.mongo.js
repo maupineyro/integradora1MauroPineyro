@@ -28,7 +28,7 @@ class Users {
         try {
          const UserById = await userModel.findById({_id: id});
         } catch (error) {
-            
+          console.log(error)  
         }
     }
 
