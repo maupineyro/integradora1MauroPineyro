@@ -56,10 +56,11 @@ const swaggerOptions = {
             description: "Documentación de la API Ecommerce para el curso de Backend de Coder",
         }
     },
-    apis:['./docs/**/*.yaml']
+    apis:['./src/docs/**/*.yaml']
 }
 
 const specs = swaggerJSDoc(swaggerOptions)
+app.use('/apidocs', swaggerUIExpress.serve, swaggerUIExpress.setup(specs))
 //
 
 
@@ -92,7 +93,7 @@ app.use ('/', viewRouter) //debe manejar la parte visible de login y register
 app.use ('/mockingproducts', mockRouter)
 app.use('/loggerTest', loggerRouter )
 app.use('/api/mailing', emailRouter)
-app.use('/apidocs', swaggerUIExpress.serve, swaggerUIExpress.setup(specs))
+
 
 //Socket IO
 const server = http.createServer(app);

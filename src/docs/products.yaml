@@ -1,0 +1,11 @@
+paths:
+  /api/products:
+    get:
+      summary: obtiene todos los productos disponibles en la tienda
+      tags:
+        - Products
+      responses:
+        "200":
+          description: trae todos los productos disponibles
+        "500":
+          description: no puede traer los productos disponibles
