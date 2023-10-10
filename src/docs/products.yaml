@@ -7,6 +7,12 @@ paths:
       responses:
         "200":
           description: trae todos los productos disponibles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Product"
         "500":
           description: no puede traer los productos disponibles
 
