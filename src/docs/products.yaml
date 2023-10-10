@@ -16,6 +16,30 @@ paths:
         "500":
           description: no puede traer los productos disponibles
 
+  /api/products/{pid}:
+    get:
+      summary: obtiene un producto disponible en la tienda, según su id
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id del producto que se desea buscar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: trae el producto seleccionado
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Product"
+        "500":
+          description: no puede traer el producto seleccionado
+
 components:
   schemas:
     Product:
