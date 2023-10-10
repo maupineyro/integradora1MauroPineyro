@@ -9,3 +9,50 @@ paths:
           description: trae todos los productos disponibles
         "500":
           description: no puede traer los productos disponibles
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por MongoDB
+        title:
+          type: String
+          description: título de producto
+        description:
+          type: String
+          description: descripción de producto
+        code:
+          type: String,
+          description: código del producto, debe ser único
+        price:
+          type: Number
+          description: precio de producto
+        category:
+          type: String
+          description: categoría de producto
+        status:
+          type: Boolean
+          description: estado de producto
+        stock:
+          type: Number
+          description: cantidad de stock de productos
+        thumbnail:
+          type: String
+          description: imagen de producto
+        owner:
+          type: String,
+          description: creador del producto, puede ser un premium user o el admin
+      example:
+        _id: ObjectId("6490b9fa6d4469bf83beb3bc")
+        title: titulo de prueba 1
+        description: descripción de prueba 1
+        code: abc000
+        price: 100
+        category: categoría de prueba1
+        status: true
+        stock: 5
+        thumbnail: "imagen de prueba 1"
+        owner: admin
