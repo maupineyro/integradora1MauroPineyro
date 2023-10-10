@@ -74,5 +74,5 @@ components:
           type: array
           items:
             type: object
-          description: Populated products in cart
+          description: se crea un carrito vacio.
       example: { "_id": "6491f68f8c7e6e12ce3bf3a2", "products": [], "__v": 0 }
