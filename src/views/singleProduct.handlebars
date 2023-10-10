@@ -14,7 +14,6 @@
         <p class="card-description">el cid es: {{user.cart}}</p>
         
         <form action="/api/carts/{{user.cart}}/products/{{product._id}}" method="POST">
-            <!-- Aquí puedes agregar campos de formulario adicionales si es necesario -->
             <button type="submit" class="btn btn-primary">Agregar al carrito</button>
         </form>
 

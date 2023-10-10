@@ -15,6 +15,21 @@ paths:
                   $ref: "#components/schemas/Product"
         "500":
           description: no puede traer los productos disponibles
+    post:
+      summary: crea un producto, debe ser admin o premium user
+      tags:
+        - Products
+      responses:
+        "201":
+          description: producto creado
+        "500":
+          description: no se ha podido crear el producto
+      requestBody:
+        required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#components/requestBodies/newProduct"
 
   /api/products/{pid}:
     get:
@@ -39,6 +54,45 @@ paths:
                   $ref: "#components/schemas/Product"
         "500":
           description: no puede traer el producto seleccionado
+    put:
+      summary: actualiza un producto disponible en la tienda, según su id
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id del producto que se desea actualizar
+          schema:
+            $type: String
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/updateProduct"
+    delete:
+      summary: Elimina un producto según su id
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          description: id del producto a eliminar
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          description: producto eliminado con exito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        "500":
+          description: no se pudo eliminar el producto
 
 components:
   schemas:
@@ -85,4 +139,89 @@ components:
         status: true
         stock: 5
         thumbnail: "imagen de prueba 1"
+        owner: admin
+  requestBodies:
+    updateProduct:
+      type: object
+      properties:
+        title:
+          type: String
+          description: título de producto
+        description:
+          type: String
+          description: descripción de producto
+        code:
+          type: String,
+          description: código del producto, debe ser único
+        price:
+          type: Number
+          description: precio de producto
+        category:
+          type: String
+          description: categoría de producto
+        status:
+          type: Boolean
+          description: estado de producto
+        stock:
+          type: Number
+          description: cantidad de stock de productos
+        thumbnail:
+          type: String
+          description: imagen de producto
+        owner:
+          type: String,
+          description: creador del producto, puede ser un premium user o el admin
+      example:
+        title: titulo de prueba 1 modificado
+        description: descripción de prueba 1 modificado
+        code: abc000
+        price: 100
+        category: categoría de prueba1 modificado
+        status: true
+        stock: 5
+        thumbnail: "imagen de prueba 1 modificado"
+        owner: admin
+    newProduct:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por MongoDB
+        title:
+          type: String
+          description: título de producto
+        description:
+          type: String
+          description: descripción de producto
+        code:
+          type: String,
+          description: código del producto, debe ser único
+        price:
+          type: Number
+          description: precio de producto
+        category:
+          type: String
+          description: categoría de producto
+        status:
+          type: Boolean
+          description: estado de producto
+        stock:
+          type: Number
+          description: cantidad de stock de productos
+        thumbnail:
+          type: String
+          description: imagen de producto
+        owner:
+          type: String,
+          description: creador del producto, puede ser un premium user o el admin
+      example:
+        _id: ObjectId("6490b9fa6d4469bf83ebb4ac")
+        title: titulo de prueba 2
+        description: descripción de prueba 2
+        code: abc000
+        price: 100
+        category: categoría de prueba2
+        status: true
+        stock: 5
+        thumbnail: "imagen de prueba 2"
         owner: admin

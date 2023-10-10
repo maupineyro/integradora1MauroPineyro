@@ -1,0 +1,10 @@
+paths:
+  /api/carts:
+    get:
+      summary: obtiene todos los carritos disponibles en la tienda
+      tags:
+        - Carts
+
+    post:
+    put:
+    delete:
