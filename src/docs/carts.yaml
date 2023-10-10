@@ -4,7 +4,48 @@ paths:
       summary: obtiene todos los carritos disponibles en la tienda
       tags:
         - Carts
+      responses:
+        "200":
+          description: trae todos los carritos disponibles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Cart"
+        "500":
+          description: no puede traer los carritos disponibles en la app
 
     post:
     put:
     delete:
+
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por MongoDB
+        products:
+          type: array
+          items:
+            type: object
+          description: los productos se almacenan como id de producto en el array products, luego con populate se pueden ver completos.
+        quantity:
+          type: Number
+          description: Cantidad del producto dentro del carrito
+      example:
+        {
+          "_id": "6491f68f8c7e6e12ce3bf3a2",
+          "products":
+            [
+              {
+                "product": "64923d8a41dc25d6a74b1647",
+                "quantity": 2,
+                "_id": "6498a74489780f754cd93fa1",
+              },
+            ],
+          "__v": 0,
+        }
