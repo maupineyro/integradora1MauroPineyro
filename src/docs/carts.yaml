@@ -17,6 +17,21 @@ paths:
           description: no puede traer los carritos disponibles en la app
 
     post:
+      summary: crea un carrito vacio
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Cart creado correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EmptyCart"
+        "500":
+          description: no se pudo crear el carrito
+
     put:
     delete:
 
@@ -49,3 +64,15 @@ components:
             ],
           "__v": 0,
         }
+    EmptyCart:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por MongoDB
+        products:
+          type: array
+          items:
+            type: object
+          description: Populated products in cart
+      example: { "_id": "6491f68f8c7e6e12ce3bf3a2", "products": [], "__v": 0 }
