@@ -32,6 +32,29 @@ paths:
         "500":
           description: no se pudo crear el carrito
 
+  /api/carts/{cid}:
+    get:
+      summary: obtiene un carrito según su cid
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id del carrito que se desea buscar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: trae el carrito seleccionado
+          content:
+            application/json:
+              schema:
+                type: array
+              items:
+                $ref: "#components/schemas/Cart"
+        "500":
+          description: no puede traer el carrito seleccionado
     put:
     delete:
 
