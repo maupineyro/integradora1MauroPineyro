@@ -20,7 +20,7 @@ export default class ProductServiceMongo {
             const options = {
                 page: page || 1,
                 limit: limit || 10,
-                sort: sort ? { [sort]: 1 } : null, // Ordenar si se proporciona un campo de ordenamiento
+                sort: sort || null, // Ordenar si se proporciona un campo de ordenamiento
             };
             const paginatedProducts = await productModel.paginate({},options);
             return paginatedProducts;
