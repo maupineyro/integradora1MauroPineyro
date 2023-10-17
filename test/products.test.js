@@ -1,25 +1,25 @@
-import ProductServiceMongo from "../src/services/dao/db/products.service.js";
 import mongoose from "mongoose";
-import Assert from "assert"
-import config from "../src/config/config.js";
+import chai from "chai";
+import supertest from "supertest";
+import ProductServiceMongo from "../src/services/dao/db/products.service.js";
 
 
-mongoose.connect(config.mongoUrl)
+mongoose.connect('mongodb+srv://mauPineyro:mongoClusterMP1Nomehable1@clustermp1.yuubkwb.mongodb.net/CoderBackendEcommerceDB'
+)
 
-describe('testing productService (Mongo)', () => {
-    before(function () {
-        this.productsDao = new ProductServiceMongo
-    })
+const expect = chai.expect
+const requester = supertest ('http://localhost:8080')
 
-    //test 1
-    it('el productDao debe traer los products en formato array guardados en mongo', async () => {
-        const result = await this.productsDao.getProducts();
-
-    })
-
-    //test 2
-    it()
-
-    //test 3
-    it()
-})
+describe ('Products Supertest', ()=>{
+    describe('testing productsDao - Mongo', () => {
+        before(function() {
+            this.productsDao = new ProductServiceMongo();
+        });
+        it('el productDao debe traer los products en formato array guardados en mongo', async () => {
+            const result = await this.productsDao.getProducts()
+            expect(result).to.have.property("docs")
+        }).timeout(8000)
+        })
+    }
+    
+)
