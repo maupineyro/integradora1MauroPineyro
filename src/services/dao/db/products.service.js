@@ -1,7 +1,10 @@
 import productModel from "./models/products.model.js";
 
 export default class ProductServiceMongo {
-//    
+//   
+    constructor(){
+        
+    }
     addProducts = async (newPr) =>{
         if (!newPr.code || !newPr.title || !newPr.description || !newPr.price || !newPr.thumbnail || !newPr.stock || !newPr.category) {
                 throw new Error('Campos vacíos, completar todos los campos');
