@@ -90,6 +90,18 @@ class CartController {
             console.log(error)
         }
     }
+//
+    async purchase (req, res){
+        try {
+            const cid = req.params.cid
+            const cart = await cartsService.getCartById(cid);
+            let ticket = {};
+            let noStock = [];
+
+        } catch (error) {
+            
+        }
+    }
 }
 
 export const cartController = new CartController;

@@ -89,6 +89,7 @@ app.use ('/realtimeproducts', realTimeRouter); //debe trabajar con webSocket y m
 app.use ("/api/products", productRouter); //debe manejar el crud de productos con diferentes rutas
 app.use ("/api/carts", cartRouter); //debe manejar el crud de carrito
 app.use ("/api/sessions",sessionRouter) // debe manejar el post de login, register, logout de sesiones
+
 app.use ('/', viewRouter) //debe manejar la parte visible de login y register
 app.use ('/mockingproducts', mockRouter)
 app.use('/loggerTest', loggerRouter )

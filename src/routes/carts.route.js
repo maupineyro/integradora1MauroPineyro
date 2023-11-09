@@ -14,6 +14,8 @@ cartRouter.get ('/', cartController.getAll) //get carts
 
 cartRouter.get ('/:cid',cartController.getCart) //get cart by Id
 
+cartRouter.get ('/:cid/purchase',cartController.purchase) // para controlar la finalización de compra
+
 cartRouter.post ('/:cid/products/:pid',CartPolicies, cartController.productToCart) //post (product en carrito)
 
 cartRouter.delete ('/:cid/products/:pid', cartController.deleteProduct) //delete un producto del carrito según su Id
