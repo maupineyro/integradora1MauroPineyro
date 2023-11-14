@@ -97,9 +97,16 @@ class CartController {
             const cart = await cartsService.getCartById(cid);
             let ticket = {};
             let noStock = [];
-
+            let subtotal = 'soy el precio subtotal'
+            let total = 'soy el precio total'
+            const purchaseCart ={
+                cart: cart,
+                subtotal,
+                total
+            }
+            res.render ('purchase', {purchaseCart})
         } catch (error) {
-            
+           console.log(error) 
         }
     }
 }

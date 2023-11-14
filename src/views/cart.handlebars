@@ -10,14 +10,14 @@
 
             <p>Nombre del producto: {{this.product.title}}</p>
             <p>Precio: $ {{this.product.price}}</p>
-            <p>Stock disponible: $ {{this.product.stock}}</p>
+            <p>Stock disponible: {{this.product.stock}}</p>
             <p>Cantidad: {{this.quantity}}</p>
             </div>
         </li>
         
         {{/each}}
     </ul>
-    <button class="card-button bg-success">Comprar</button>
+    <button class="card-button bg-success" ><a href="{{cart._id}}/purchase">Checkout</a></button>
     </div>
    
 {{/if}}
