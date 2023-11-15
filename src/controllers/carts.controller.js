@@ -95,14 +95,38 @@ class CartController {
         try {
             const cid = req.params.cid
             const cart = await cartsService.getCartById(cid);
+            const arrayProductsFromTheCart= await cartsService.getArrayProductsFromTheCart(cid)
+
+            console.log('el array que contiene los productos (cart.products) es :', arrayProductsFromTheCart);
+            
             let ticket = {};
-            let noStock = [];
-            let subtotal = 'soy el precio subtotal'
-            let total = 'soy el precio total'
-            const purchaseCart ={
-                cart: cart,
-                subtotal,
-                total
+            let subtotals = [];
+            let noEnoughStock = [];
+
+        for (const product of arrayProductsFromTheCart) {
+        const productStock = product.product.stock;
+        const productQuantity = product.quantity;
+
+        if (productStock < productQuantity) {
+        noEnoughStock.push(product);
+        } else {
+        const subtotal = product.product.price * product.quantity;
+        subtotals.push(subtotal);
+            }
+        }
+
+        console.log('el subtotal es:',subtotals); 
+        console.log('el noStock es:',noEnoughStock)
+            
+
+        
+        let total = 'soy el precio total'
+        const purchaseCart ={
+                cid,
+                cart,
+                total,
+                ticket,
+                
             }
             res.render ('purchase', {purchaseCart})
         } catch (error) {

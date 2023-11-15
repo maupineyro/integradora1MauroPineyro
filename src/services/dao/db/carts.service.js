@@ -31,6 +31,15 @@ export default class CartServiceMongo {
             console.log (error);
         }
     } 
+//
+    getArrayProductsFromTheCart = async (id) =>{
+        try {
+           const cart = await cartModel.findById(id).populate('products.product').lean();
+            return cart.products; 
+        } catch (error) {
+            console.log(error)
+        }
+    }    
 //   
     addProductToCart = async (cid,pid) => {
         try {

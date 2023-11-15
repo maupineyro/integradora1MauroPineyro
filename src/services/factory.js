@@ -17,9 +17,8 @@ async function initializeMongoService() {
         cartsService = new CartServiceMongo();
         usersService = new UserServiceMongo();
 
-        console.log(`Servicio de products cargado (mongoDB)`);
-        console.log(`Servicio de carts cargado (mongoDB)`);
-        console.log(`Servicio de users cargado (mongoDB)`);
+        console.log(`mongoDB services Ok`);
+        
         
 
     } catch (error) {
