@@ -43,10 +43,13 @@ export const changeMembership = async (req, res) =>{
  const uid = req.params.uid
  const userDb = await usersService.getUserById(uid)
  try {
-    console.log("el user encontrado es", userDb, userDb.role);
+    //console.log("el user encontrado es", userDb, userDb.role);
     let newRole = '';
     userDb.role === 'user' ? newRole= 'premium' : newRole = 'user'
-    console.log("el newrole es", newRole)
+    //console.log("el newrole es", newRole)
+    await usersService.updateUser({_id: uid},{role:newRole});
+    const result = await usersService.getUserById(uid)
+    return result
  } catch (error) {
     console.log (error)
  }

@@ -62,6 +62,16 @@ export default class UserService {
     // Obtener el usuario logueado haciendo >> const user = await currentUser(req);
 
     // Obtener el rol del usuario logueado haciendo >> const role = user.role;
+//
+    updateUser = async (uid,newData)=>{
+        try {
+            return await userModel.findOneAndUpdate(uid,newData)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
 }// cierra la class
 
 // 
