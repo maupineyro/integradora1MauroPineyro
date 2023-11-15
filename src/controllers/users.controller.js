@@ -40,5 +40,14 @@ export const saveUser = async (req, res)=>{
 }
 
 export const changeMembership = async (req, res) =>{
- const userId = req.params.uid
+ const uid = req.params.uid
+ const userDb = await usersService.getUserById(uid)
+ try {
+    console.log("el user encontrado es", userDb, userDb.role);
+    let newRole = '';
+    userDb.role === 'user' ? newRole= 'premium' : newRole = 'user'
+    console.log("el newrole es", newRole)
+ } catch (error) {
+    console.log (error)
+ }
 }
