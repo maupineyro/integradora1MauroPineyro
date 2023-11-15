@@ -1,23 +1,32 @@
 {{#if cart}}
-    <div class="card">
-    <p>soy el cart {{cart._id}}</p>
-    <ul>
-        {{#each cart.products}}
-        <li>
-            <div class="bg-secondary">
-                <img src="https://d22k5h68hofcrd.cloudfront.net/magefan_blog/C_mo_saber_el_modelo_de_tu_laptop.png" alt="Imagen"
-                    class="card-image">
-
-            <p>Nombre del producto: {{this.product.title}}</p>
-            <p>Precio: $ {{this.product.price}}</p>
-            <p>Stock disponible: {{this.product.stock}}</p>
-            <p>Cantidad: {{this.quantity}}</p>
+    <div class="container-fluid text-center m-3">
+        <div class="row">
+            <div class="bg-info text-white">
+                <p class="titleContainer fs-3 my-5">Carrito #{{cart._id}}</p>
             </div>
-        </li>
-        
-        {{/each}}
-    </ul>
-    <button class="card-button bg-success" ><a href="{{cart._id}}/purchase">Checkout</a></button>
+            <div class="col-md-8">
+                
+                <ul class="cart-list">
+                    {{#each cart.products}}
+                    <li class="cart-item">
+                        <div class="product-info">
+                            <img class="product-image mx-2" src="https://d22k5h68hofcrd.cloudfront.net/magefan_blog/C_mo_saber_el_modelo_de_tu_laptop.png" alt="Imagen">
+                            <div class="product-details bg-secondary p-3">
+                                <p class="product-title"> {{this.product.title}}</p>
+                                <p class="product-price">Precio: $ {{this.product.price}}</p>
+                                <p class="product-stock">Stock disponible: {{this.product.stock}}</p>
+                                <p class="product-quantity">Cantidad: {{this.quantity}}</p>
+                            </div>
+                        </div>
+                    </li>
+                    {{/each}}
+                    
+                </ul>
+        </div>
+        <div class="col-md-4">
+            <button class="card-button"><a class="textWhite" href="{{cart._id}}/purchase">Checkout</a></button>
+        </div>
     </div>
-   
+</div>
+  
 {{/if}}

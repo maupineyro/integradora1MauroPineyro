@@ -1,6 +1,21 @@
 {{#if purchaseCart}}
 
 <p>Carrito #{{purchaseCart.cid}}</p>
-<p>total: $ {{purchaseCart.total}}</p>
+<P>Se han comprado los siguientes productos:</P>
+<p>blabla</p>
+<p>total: {{purchaseCart.total}}</p>
+<br>
+{{#if purchaseCart.noEnoughStock}}
+<p>No se ha podido completar la compra de los siguientes productos:</p>
+    <p class="text-danger"> pendientes:
+        {{#each purchaseCart.noEnoughStock}}
+       
+        <div class="card">
+         <p>{{this.product.title}}</p> 
+
+        </div>
+        {{/each}}
+    </p>
+{{/if}}
 <button>Finalizar Compra</button>
 {{/if}}

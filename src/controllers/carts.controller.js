@@ -97,7 +97,7 @@ class CartController {
             const cart = await cartsService.getCartById(cid);
             const arrayProductsFromTheCart= await cartsService.getArrayProductsFromTheCart(cid)
 
-            console.log('el array que contiene los productos (cart.products) es :', arrayProductsFromTheCart);
+            //console.log('el array que contiene los productos (cart.products) es :', arrayProductsFromTheCart);
             
             let ticket = {};
             let subtotals = [];
@@ -115,16 +115,20 @@ class CartController {
             }
         }
 
-        console.log('el subtotal es:',subtotals); 
-        console.log('el noStock es:',noEnoughStock)
+        //console.log('el subtotal es:',subtotals); 
+        //console.log('el noStock es:',noEnoughStock)
             
+        // Calcula el precio total
+        const totalPrice = subtotals.reduce((accumulator, actual) => accumulator + actual);
 
+    console.log('el precio total es:', totalPrice)
         
-        let total = 'soy el precio total'
+        let total = `el precio total es $ ${totalPrice}`
         const purchaseCart ={
                 cid,
                 cart,
                 total,
+                noEnoughStock,
                 ticket,
                 
             }

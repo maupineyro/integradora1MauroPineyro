@@ -76,7 +76,7 @@ function toggleDescripcion(button) {
     const html = products.map (elem =>{
       return (`
       <div class="card">
-      <img src="https://d22k5h68hofcrd.cloudfront.net/magefan_blog/C_mo_saber_el_modelo_de_tu_laptop.png" alt="Imagen" class="card-image">
+      <img src="${elem.thumbnail}" alt="Imagen" class="card-image">
       <h2 class="card-title">${elem.title}</h2>
       <p class="card-id">ID: ${elem._id}</p>
       <p class="card-price"> precio: $ ${elem.price}</p>

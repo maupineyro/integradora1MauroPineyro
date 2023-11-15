@@ -48,5 +48,20 @@ export default class UserService {
             console.log(error)
         }
     }
-}
+//
+    currentUser = async (req) => {
+        try {
+            if (!req.session.user) {
+            return null;
+            }  
+            return req.session.user;
+        } catch (error) {
+            console.log(error)
+        }
+    }    
+    // Obtener el usuario logueado haciendo >> const user = await currentUser(req);
 
+    // Obtener el rol del usuario logueado haciendo >> const role = user.role;
+}// cierra la class
+
+// 
