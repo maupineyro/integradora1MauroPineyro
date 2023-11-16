@@ -42,14 +42,21 @@ export const saveUser = async (req, res)=>{
 export const changeMembership = async (req, res) =>{
  const uid = req.params.uid
  const userDb = await usersService.getUserById(uid)
+
+ if (!userDb) {
+    res.status(404).send('El usuario no existe');
+    return;
+  }
+
  try {
-    //console.log("el user encontrado es", userDb, userDb.role);
     let newRole = '';
     userDb.role === 'user' ? newRole= 'premium' : newRole = 'user'
-    //console.log("el newrole es", newRole)
-    await usersService.updateUser({_id: uid},{role:newRole});
-    const result = await usersService.getUserById(uid)
-    return result
+    
+    await usersService.updateUser({_id:uid},{role:newRole});
+    
+    const result = await usersService.getUserById(uid);
+    console.log("el user modificado es:", result)
+    return res.status(200).send('El rol del usuario se ha actualizado correctamente');
  } catch (error) {
     console.log (error)
  }

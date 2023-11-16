@@ -1,0 +1,23 @@
+<div>
+  <h1 class="titleContainer">Cambiar membresía</h1>
+
+  {{#if currentUser}}
+    <div class="d-flex justify-content-center align-items-center p-3">
+      <p class="m-3">nombre: {{currentUser.first_name}}</p>
+      <p class="m-3">user: {{currentUser.email}}</p>
+      <p class="m-3" {{bind-attr role="currentUser.role"}}></p>
+      <p class="m-3">uid:{{currentUser._id}}</p>
+    </div>
+    <form action="/api/sessions/premium/{{currentUser._id}}" method="POST">
+      <input
+        type="submit"
+        class="btn btn-primary card-button"
+        value="Cambiar membresía"
+      />
+    </form>
+
+  {{/if}}
+</div>
+{{#if currentUser}}
+  {{bind-attr role="currentUser.role"}}
+{{/if}}

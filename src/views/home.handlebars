@@ -1,54 +1,77 @@
 {{#if user}}
-<div >
+  <div>
     <ul class="d-flex flex-row-reverse">
-        <li><a class="mx-3" href="http://localhost:8080/api/sessions/logout">Cerrar Sesión</a></li>
-        <li><a class="mx-3" href="http://localhost:8080/realtimeproducts">Realtime (para admin)</a> </li>
-        <li><a class="mx-3" href="http://localhost:8080/profile">Perfil</a></li>
-        <li><a class="mx-3" href="http://localhost:8080/api/carts/{{user.cart}}">Carrito</a></li>
+      <li><a
+          class="mx-3"
+          href="http://localhost:8080/api/sessions/logout"
+        >Cerrar Sesión</a></li>
+      <li><a class="mx-3" href="http://localhost:8080/realtimeproducts">Realtime
+          (para admin)</a>
+      </li>
+      <li><a class="mx-3" href="http://localhost:8080/profile">Perfil</a></li>
+      <li><a
+          class="mx-3"
+          href="http://localhost:8080/api/carts/{{user.cart}}"
+        >Carrito</a></li>
+      <li><a
+          class="mx-3"
+          href="/api/sessions/premium/{{user._id}}"
+        >Membresía</a></li>
     </ul>
-</div>
-<div class="bg-info text-white">
+  </div>
+  <div class="bg-info text-white">
     <p class="titleContainer fs-3 my-5">Bienvenido {{user.first_name}}!!!</p>
-</div>
-{{/if}}    
-    
+  </div>
+{{/if}}
 
 <div class="titleContainer">
-    <h1>Productos disponibles</h1>
+  <h1>Productos disponibles</h1>
 </div>
 
 <div class="gridContainer">
-    {{#each products}}
+  {{#each products}}
     <div class="card">
-        <img src={{this.thumbnail}} alt="Imagen" class="card-image">
-        
-        <h2 class="card-title">{{this.title}}</h2>
-        
-        
-        <p class="card-id">ID: {{this._id}}</p>
-        
-        <p class="card-price"> precio: $ {{this.price}}</p>
-        <div class="d-flex flex-column mb-3">
-            <button class="card-button" onclick="toggleDescripcion(this)" data-visible="false">Mostrar descripción</button>
-            <p class="card-description">{{this.description}}</p>
-            <button class="card-button "  ><a class="textWhite" href="api/products/{{this._id}}">Ver detalles</a></button>
-        </div>
-       
-    </div>
-    {{/each}}
+      <img src={{this.thumbnail}} alt="Imagen" class="card-image" />
 
-    {{#if pagination.hasPrevPage}}
-    <a style='font-size: 30;' href='/home/?page={{pagination.prevPage}}'>⬅{{pagination.prevPage}}</a>
-    {{/if}}
-    <a style='font-size: 30;' href='#'>{{pagination.page}}</a>
-    {{#if pagination.hasNextPage}}
-    <a style='font-size: 30;' href='/home/?page={{pagination.nextPage}}'>{{pagination.nextPage}}➡</a>
-    {{/if}}
-    <br />
-    <br />
-    {{#each links}}
-    <a href='{{this.href}}'>{{this.label}}</a>
-    {{/each}}
+      <h2 class="card-title">{{this.title}}</h2>
+
+      <p class="card-id">ID: {{this._id}}</p>
+
+      <p class="card-price"> precio: $ {{this.price}}</p>
+      <div class="d-flex flex-column mb-3">
+        <button
+          class="card-button"
+          onclick="toggleDescripcion(this)"
+          data-visible="false"
+        >Mostrar descripción</button>
+        <p class="card-description">{{this.description}}</p>
+        <button class="card-button"><a
+            class="textWhite"
+            href="api/products/{{this._id}}"
+          >Ver detalles</a></button>
+      </div>
+
+    </div>
+  {{/each}}
+
+  {{#if pagination.hasPrevPage}}
+    <a
+      style="font-size: 30;"
+      href="/home/?page={{pagination.prevPage}}"
+    >⬅{{pagination.prevPage}}</a>
+  {{/if}}
+  <a style="font-size: 30;" href="#">{{pagination.page}}</a>
+  {{#if pagination.hasNextPage}}
+    <a
+      style="font-size: 30;"
+      href="/home/?page={{pagination.nextPage}}"
+    >{{pagination.nextPage}}➡</a>
+  {{/if}}
+  <br />
+  <br />
+  {{#each links}}
+    <a href="{{this.href}}">{{this.label}}</a>
+  {{/each}}
 </div>
 
 <script src="/js/index.js"></script>

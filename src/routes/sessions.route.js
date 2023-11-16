@@ -4,6 +4,7 @@ import { accountLogged } from "../middlewares/auth.js";
 import UserDto from "../services/dto/user.dto.js";
 import { sendEmail } from "../controllers/emails.controller.js";
 import { changeMembership } from "../controllers/users.controller.js";
+import { usersService } from "../services/factory.js";
 
 const sessionRouter = Router();
 
@@ -64,11 +65,17 @@ sessionRouter.get('/current', async (req,res)=>{
     return res.send({msg:"No hay sesión activa", payload:(req.session)})
     
 })
+sessionRouter.post('/premium/:uid', changeMembership)
 
-sessionRouter.get('/premium/:uid', changeMembership);
+sessionRouter.get('/premium/:uid', async (req,res)=>{
+    
+    let currentUser = await usersService.currentUser(req);
+    res.render('changemembership', {currentUser})
+});
 
 
 sessionRouter.get('/recoverpassword', async (req,res)=>{
+    
      res.render('recoverpassword', {})
 })
 
