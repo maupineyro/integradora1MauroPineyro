@@ -4,7 +4,7 @@ import {Router} from 'express';
 import { isUser } from '../middlewares/auth.js';
 const chatRouter = Router();
 
-chatRouter.get('/', isUser, (req,res) =>{
+chatRouter.get('/',isUser, (req,res) =>{
     res.render('chat', {})
 })
 

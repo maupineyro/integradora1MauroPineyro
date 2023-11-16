@@ -6,7 +6,7 @@ import messageModel from "../services/dao/db/models/messages.model.js";
 const socketChat = async(io) =>{
     
     io.on ('connection', async (socket)=>{
-        console.log ('connection: Chat connected');
+        //console.log ('connection: Chat connected');
         const msgLogs = await messageModel.find();//parte inicial
         //console.log(msgLogs)
         socket.emit('allMessages', msgLogs)

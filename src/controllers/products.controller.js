@@ -1,14 +1,19 @@
 
 import { productsService } from "../services/factory.js";
 import { generateMockingProducts } from "../utils/utils.mocks.js";
+import UserDto from "../services/dto/user.dto.js";
+
 
 class ProductController {
 //    
     async add(req, res) {
         try {
-        let {dataProduct} = req.body
-        let newPr = await productsService.addProducts(dataProduct);
-        res.status(201).send(newPr); 
+            const currentUser = req.session.user
+            let {dataProduct} = req.body
+        
+            let newPr = await productsService.addProducts(dataProduct, currentUser);
+            res.status(201).send(newPr); 
+
         } catch (error) {
         res.status(500).send(`se sufre este ${error}`)
         }

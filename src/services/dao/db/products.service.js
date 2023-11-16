@@ -5,14 +5,27 @@ export default class ProductServiceMongo {
     constructor(){
         
     }
-    addProducts = async (newPr) =>{
+    addProducts = async (newPr,currentUser) =>{
         if (!newPr.code || !newPr.title || !newPr.description || !newPr.price || !newPr.thumbnail || !newPr.stock || !newPr.category) {
                 throw new Error('Campos vacíos, completar todos los campos');
             }
         let existingProduct = await productModel.findOne({ code: newPr.code });
         if (existingProduct) {
             throw new Error('El código del producto ya existe en la base de datos');
-        }   
+        }
+
+        if (currentUser && currentUser.role) {
+                if (currentUser.role === 'premium') {
+                    newPr.owner = currentUser._id
+                } else if (currentUser.role === 'user') {
+                    throw new Error('debes ser admin o premium')
+                } else {
+                    newPr.owner = 'admin'
+                }
+            } else {
+                newPr.owner = 'admin'
+            }
+         
         const newProduct = new productModel(newPr).save();
         return newProduct
     };

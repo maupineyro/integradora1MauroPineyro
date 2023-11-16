@@ -34,7 +34,7 @@ sessionRouter.post('/login', passport.authenticate('login',{failureRedirect:'/ap
     cart:req.user.cart._id,
     role: req.user.role
    }
-   console.log(req.session.user)
+   //console.log(req.session.user)
    let userlogged = req.session.user
    //res.render('profile', { user: userlogged });
    res.redirect('/profile')

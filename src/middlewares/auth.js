@@ -1,3 +1,5 @@
+import { usersService } from "../services/factory.js";
+
 export function accountLogged(req,res,next){
     if(req.session?.user){
         return next();
@@ -18,16 +20,22 @@ export async function isAdminOrPremium(req,res,next){
     });
 }
 
-export async function isUser(req,res,next){
-    await req.session.user;
-    if (req.session?.user?.role == "user"){
-        console.log("el user role es ", req.session.user.role)
-        return next();
+export async function isUser(req, res, next) {
+  try {
+    if (req.session?.user?.role !== 'admin') {
+      return next();
+    } else {
+      return res.status(403).send('No tienes permiso para acceder a esta ruta');
     }
-    return res.status(403).render('error', {
-        error: 'error de autorización: STATUS 403!!'
-    });
+  } catch (error) {
+    console.log(error);
+    return res.status(401).send('No autorizado');
+  }
 }
+
+ 
+
+
 
 export function redirectToHomeIfUserLogged(req, res, next) {
     if (req.session.user) {
