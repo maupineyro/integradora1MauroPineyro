@@ -4,6 +4,8 @@ import EErrors from "../services/errors/errorsEnum.js";
 import { generateUserErrorInfo } from "../services/errors/errorMessages.js";
 //import UserService from "../services/users.service.js";
 import { usersService } from "../services/factory.js";
+import UserDto from "../services/dto/user.dto.js";
+
 
 
 
@@ -60,4 +62,14 @@ export const changeMembership = async (req, res) =>{
  } catch (error) {
     console.log (error)
  }
+}
+
+export const currentSession = async (req, res)=>{
+   
+    if(req.session.user){
+        const currentSessionDto = new UserDto(req.session.user)
+        return res.status(200).json({current: currentSessionDto, message:'user logueado'})
+    }else {
+        return res.status(401).json({message: 'error, user no logueado'})
+    }
 }

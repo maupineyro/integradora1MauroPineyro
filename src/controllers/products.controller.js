@@ -10,8 +10,20 @@ class ProductController {
         try {
             const currentUser = req.session.user
             let {dataProduct} = req.body
-        
-            let newPr = await productsService.addProducts(dataProduct, currentUser);
+
+             if (currentUser && currentUser.role) {
+                if (currentUser.role === 'premium') {
+                    dataProduct.owner = currentUser._id
+                } else if (currentUser.role === 'user') {
+                    throw new Error('debes ser admin o premium')
+                } else {
+                    dataProduct.owner = 'admin'
+                }
+            } else {
+                dataProduct.owner = 'admin'
+            }
+            console.log("dataProduct para agregar:", dataProduct)
+            let newPr = await productsService.addProducts(dataProduct);
             res.status(201).send(newPr); 
 
         } catch (error) {

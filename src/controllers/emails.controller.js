@@ -1,8 +1,7 @@
 import nodemailer from "nodemailer";
 import config from "../config/config.js";
 
-
-
+//transporter y su verify
 const transporter = nodemailer.createTransport (
   {
     service: 'gmail',
@@ -22,16 +21,23 @@ transporter.verify(function(error, success){
   }
 })
 
-const mailOptions = {
-  from: 'coder app ecommerce' + config.gmailAccount,
-  to: config.gmailAccount,
-  subject: 'correo de prueba',
-  html: "<div><h1>próximamente cambio de pass</h1></div>",
-  attachments: []
-}
+//función para enviar mails
 
 export const sendEmail = (req, res) => {
     try {
+        const emailForRecovery = req.body;
+        if (!emailForRecovery) {
+            return res.status(400).send({ message: 'Falta la dirección de correo para reestablecer contraseña' });
+        }
+        const mailOptions = 
+          {
+          from: 'coder app ecommerce' + config.gmailAccount,
+          to: emailForRecovery,
+          subject: 'correo de prueba',
+          html: "<div><h1>próximamente cambio de pass</h1></div>",
+          attachments: []
+          }
+
         let result = transporter.sendMail(mailOptions,(error, info)=>{
           if(error){
             console.log(error)
@@ -44,3 +50,4 @@ export const sendEmail = (req, res) => {
       res.status(500).send({error: error, message:"no se pudo enviar el email desde"+ config.gmailAccount })  
     }
 }
+
